@@ -1,0 +1,181 @@
+.selectChain {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.Chain {
+    margin: 10px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    display: block;
+    font-size: 13;
+}
+
+.select {
+    align-self: center;
+    width: 85%;
+    font-size: 10pt;
+    font-family: 'roboto';
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+}
+
+.weight {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-container {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    font-size: 10pt;
+    margin: 0px;
+    width: 100%;
+    align-items:center;
+}
+
+.weight-label { 
+    margin-top: 5px;
+    margin-left: 15px;
+    display: block;
+    font-size: 13pt;
+}
+
+.slider-label {
+    flex: 4;
+    align-self: center;
+    width: 100%;
+    font-family: 'roboto';
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.slider {
+    flex: 4;
+    width: 100%;
+    height: 1px;
+    -webkit-appearance: none; 
+    appearance: none;
+    background: black;
+    outline: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1px;
+    height: 16px;
+    background: black;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 1px;
+    height: 16px;
+    border: none;
+    background: black;
+    cursor: pointer;
+}
+
+.slider-value {
+    flex: 1;
+    text-align: right;
+    margin-left: 20px;
+    margin-right: 15px;
+    font-size: 10pt;
+    font-family: 'roboto';
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.filter {
+    flex: 1;
+    display: flex;
+    margin-top: 0;
+    flex-direction: row;
+    font-size: 13pt;
+    width: 100%;
+    height: 100%;
+}
+
+.filter-label {
+    flex: 1;
+    margin-left: 15px;
+    margin-top: 10px;
+    font-family: 'roboto';
+}
+
+.interestedVal {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.interest-label {
+    flex: 5;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-family: 'roboto';
+    font-size: 12pt;
+    margin-bottom: 15px;
+}
+
+.interest-button {
+    flex: 1;
+    margin-top: 5px;
+    background: none;
+    border: none;
+}
+
+.select-chain-val {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0px;
+    margin-right: 15px;
+}
+
+.selectInt {
+    align-self: center;
+    flex: 5;
+    width: 120%;
+    font-size: 10pt;
+    font-family: 'roboto';
+    padding-left: 5px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+}
+
+.button {
+    flex: 1;
+    margin-left: 10px;
+    width: 20px;
+    height: 23px;
+    background: none;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    font-weight:lighter;
+}
+
+.selected {
+    display: flex;
+    flex-direction: column;
+}

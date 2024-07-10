@@ -1,0 +1,136 @@
+.App {
+  text-align: left;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.title {
+  flex: 1;
+}
+
+.title-line {
+  flex: 1;
+  align-items: left;
+  width: 1410px;
+}
+
+.pov {
+  font-family: "Mosk";
+  font-weight: bolder;
+  font-size: 18px;
+  margin: 5px;
+}
+
+.main {
+  flex: 15;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.leftDiv {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 5px;
+}
+
+.userInput {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+.interVal{
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+.ranking {
+  flex: 1;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+.rightDiv {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.rightTop {
+  height: 495px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.center {
+  flex: 3;
+  border-radius: 8px;
+  margin: 0px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  padding: 0px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+.rightSideBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+
+.history {
+  /* flex: 1; */
+  height: 180px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+}
+
+.classInfo,
+.valScore {
+  margin-bottom: 15px;
+}

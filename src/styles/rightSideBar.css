@@ -1,0 +1,19 @@
+
+.class-info-container {
+    flex: 1;
+    max-width: 345px;
+    max-height: 500px;
+    overflow-y: scroll;
+    margin: 5px;
+    flex: 1;
+}
+
+.radar-chart-container {
+    flex: 1;
+    max-width: 345px;
+    max-height: 500px;
+    overflow-y: scroll;
+    margin: 5px;
+    flex: 1;
+}
+

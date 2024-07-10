@@ -1,0 +1,20 @@
+.tooltip-content {
+    position: absolute;
+    pointer-events: auto;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.svg {
+    /* border: 1px solid black; */
+    border-radius: 8px;
+}
+
+.svg circle:focus {
+    outline: none;
+}

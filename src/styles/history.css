@@ -1,0 +1,50 @@
+.history-in{
+    width: 100%;
+}
+
+.history-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.radio-buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+  
+.radio-buttons label {
+    margin-bottom: 5px;
+}
+
+.radio-input{
+    display: none;
+}
+
+.radio-input + span::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+.radio-input:checked + span::before {
+    background-color: black;
+}
+
+.radio-label{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.line-chart-container{
+    flex: 8;
+    margin-left: 10px;
+    width: 1000px;
+}
