@@ -3,10 +3,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import '../styles/ranking.css';
+import '../../styles/ranking.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleCircleId } from '../store';
+import { toggleCircleId } from '../../store';
 
 
 function Ranking({ valList }) {
