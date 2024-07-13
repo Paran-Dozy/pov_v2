@@ -6,6 +6,5 @@ export { default as Ranking } from "./Ranking/index";
 export { default as Center } from "./center";
 export { default as ClassificationInfo } from "./rightSideBar/classInfo";
 export { default as ValScore } from "./rightSideBar/valScore";
-export { default as History } from "./history";
 export { default as BottomLineChart} from "./BottomLineChart/index";
 export { default as RadarChartComponent} from "./RadarChart/index";
