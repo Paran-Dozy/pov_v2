@@ -12,9 +12,9 @@ dist
 dist-ssr
 *.local
 
-server/fin_score.csv
-server/fin_val.csv
-server/timeSeriesVal.csv
+api/fin_score.csv
+api/fin_val.csv
+api/timeSeriesVal.csv
 
 src/data/chain.json
 src/data/fin_data.json
