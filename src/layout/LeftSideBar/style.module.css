@@ -7,34 +7,47 @@
 }
 
 .UserInputContainer{
+    height: 35px;
     margin-top: 15px;
     margin-bottom: 10px;
 }
 
 .FilterContainer{
+    height: 35px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .RankingContainer{
+    height: 700px;
     margin-top: 10px;
     margin-bottom: 40px;
 }
 
 .UserInputContainer, .FilterContainer, .RankingContainer{
     width: 210px;
-    height: 420px;
 
     margin-left: 40px;
     margin-right: 10px;
 }
 
+.expanded {
+    height: 255px;
+}
 
-.Container {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 5px;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.2, 0.2);
+.expandButton {
+    width: 20px;
+    height: 20px;
+    float: right;
+    font-weight: bolder;
+    font-stretch: wider;
+    margin-right: 10px;
+    
+    border: none;
+    background-color: white;   
+}
+
+.UserInputContent {
+    height: 220px;
+    width: 210px;
 }
