@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
+import RadViz from '../../components/RadViz';
 
 function MainViz(){
     
@@ -7,7 +8,7 @@ function MainViz(){
         <div className={style.MainViz}>
             <div className={style.RadVizContainer}>
                 <div className='Container'>
-                    
+                    <RadViz />
                 </div>
             </div>
             <div className={style.RadHisContainer}>
