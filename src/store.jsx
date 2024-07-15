@@ -1,9 +1,21 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    inputChain: 'akash',
     selectedCircleIds: [],
     selectedChainVals: []
 };
+
+const chainSlice = createSlice({
+    name: 'chain',
+    initialState,
+    reducers: {
+        setChain: (state, chain) => {
+            state.inputChain = chain;
+        }
+    }
+});
+
 
 const circleSlice = createSlice({
     name: 'circles',
@@ -43,13 +55,15 @@ const interestedSlice = createSlice({
     }
 });
 
+export const { setChain } = chainSlice.actions;
 export const { toggleCircleId, resetCircleIds } = circleSlice.actions;
 export const { addInterested, removeInterested } = interestedSlice.actions;
 
 const store = configureStore({
     reducer: {
         circles: circleSlice.reducer,
-        interested: interestedSlice.reducer
+        interested: interestedSlice.reducer,
+        chain: chainSlice.reducer
     }
 });
 

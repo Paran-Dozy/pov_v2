@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import style from './style.module.css';
+import ChainSelect from '../../components/ChainSelect';
 
 function LeftSideBar(){
     const [expanded, setExpanded] = useState(false);
@@ -20,7 +21,7 @@ function LeftSideBar(){
                     </div>
                     {expanded && (
                         <div className={style.UserInputContent}>
-                            <p>This is additional content visible when expanded.</p>
+                            <ChainSelect />
                         </div>
                     )}
                 </div>
