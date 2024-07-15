@@ -1,0 +1,35 @@
+.title {
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+    font-weight: bolder;
+
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.SliderContainer {
+    width: 210px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+.label {
+    width: 70px;
+    margin-left: 10px;
+
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 12px;
+}
+
+.slider {
+    width: 100px;
+}
+
+.value {
+    margin-left: 10px;
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 12px;
+}

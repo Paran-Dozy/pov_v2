@@ -2,6 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     inputChain: 'akash',
+    inputWeight: [3, 3, 3, 3, 3],
     selectedCircleIds: [],
     selectedChainVals: []
 };
@@ -10,8 +11,18 @@ const chainSlice = createSlice({
     name: 'chain',
     initialState,
     reducers: {
-        setChain: (state, chain) => {
-            state.inputChain = chain;
+        setChain: (state, action) => {
+            state.inputChain = action.payload;
+        }
+    }
+});
+
+const weightSlice = createSlice({
+    name: 'weight',
+    initialState,
+    reducers: {
+        setWeight: (state, action) => {
+            state.inputWeight = action.payload;
         }
     }
 });
@@ -56,14 +67,16 @@ const interestedSlice = createSlice({
 });
 
 export const { setChain } = chainSlice.actions;
+export const { setWeight } = weightSlice.actions;
 export const { toggleCircleId, resetCircleIds } = circleSlice.actions;
 export const { addInterested, removeInterested } = interestedSlice.actions;
 
 const store = configureStore({
     reducer: {
+        chain: chainSlice.reducer,
+        weight: weightSlice.reducer,
         circles: circleSlice.reducer,
-        interested: interestedSlice.reducer,
-        chain: chainSlice.reducer
+        interested: interestedSlice.reducer
     }
 });
 

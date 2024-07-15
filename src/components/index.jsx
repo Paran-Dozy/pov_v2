@@ -8,3 +8,7 @@ export { default as ClassificationInfo } from "./rightSideBar/classInfo";
 export { default as ValScore } from "./rightSideBar/valScore";
 export { default as BottomLineChart} from "./BottomLineChart/index";
 export { default as RadarChartComponent} from "./RadarChart/index";
+
+
+export { default as ChainSelect } from "./ChainSelect";
+export { default as WeightSelect } from "./WeightSelect";

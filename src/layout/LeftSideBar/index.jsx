@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import style from './style.module.css';
-import ChainSelect from '../../components/ChainSelect';
+import { ChainSelect, WeightSelect } from '../../components';
 
 function LeftSideBar(){
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
 
     const toggleExpand = () => {
         setExpanded(!expanded);
@@ -22,6 +22,7 @@ function LeftSideBar(){
                     {expanded && (
                         <div className={style.UserInputContent}>
                             <ChainSelect />
+                            <WeightSelect />
                         </div>
                     )}
                 </div>
