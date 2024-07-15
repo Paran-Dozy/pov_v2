@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './style.module.css';
-import { ChainSelect, WeightSelect } from '../../components';
+import { ChainSelect, WeightSelect, Ranking } from '../../components';
 
 function LeftSideBar(){
     const [expanded, setExpanded] = useState(true);
@@ -29,7 +29,7 @@ function LeftSideBar(){
             </div>
             <div className={style.RankingContainer}>
                 <div className='Container'>
-                    
+                    <Ranking />
                 </div>
             </div>
         </div>
