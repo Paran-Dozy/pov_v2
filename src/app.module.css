@@ -1,0 +1,55 @@
+.app {
+    flex-direction: row;
+    display: flex;
+    width: 1440px;
+    height: 720px;
+    background-color: white; 
+}
+
+
+.leftContainer{
+    width: 260px;
+    height: 720px;
+    flex-direction: column;
+}
+  
+.rightContainer{
+    width: 1180px;
+    height: 720px;
+    flex-direction: column;
+}
+
+.titleContainer{
+    width: 260px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    width: 210px;
+    font-size: 26.5px;
+    font-family: 'AppleSDGothicNeoEB';
+    font-weight: bold;
+    
+    padding-top: 50px;
+    padding-left: 40px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+}
+
+.LeftSideBar{
+    width: 260px;
+    height: 640px;
+}
+
+.MainViz{
+    width: 1180px;
+    height: 470px;
+}
+
+.BottomComparison{
+    width: 1180px;
+    height: 250px;
+}
