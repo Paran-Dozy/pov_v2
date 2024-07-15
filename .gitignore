@@ -19,7 +19,7 @@ api/timeSeriesVal.csv
 src/data/chain.json
 src/data/fin_data.json
 src/data/validator_score.json
-src/data/valData.csv
+api/valData.csv
 
 # Editor directories and files
 .vscode/*
