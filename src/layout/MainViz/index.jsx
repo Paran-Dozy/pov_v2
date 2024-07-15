@@ -6,12 +6,12 @@ function MainViz(){
     return (
         <div className={style.MainViz}>
             <div className={style.RadVizContainer}>
-                <div className={style.Container}>
+                <div className='Container'>
                     
                 </div>
             </div>
             <div className={style.RadHisContainer}>
-                <div className={style.Container}></div>
+                <div className='Container'></div>
 
             </div>
         </div>

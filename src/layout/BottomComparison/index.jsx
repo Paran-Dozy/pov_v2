@@ -6,17 +6,17 @@ function BottomComparison(){
     return (
         <div className={style.BottomComparison}>
             <div className={style.RadarChartContainer}>
-                <div className={style.Container}>
+                <div className='Container'>
                     
                 </div>
             </div>
             <div className={style.LineChartContainer}>
-                <div className={style.Container}>
+                <div className='Container'>
                     
                 </div>
             </div>
             <div className={style.SelectedListContainer}>
-                <div className={style.Container}>
+                <div className='Container'>
                     
                 </div>
             </div>
