@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
+import RadvizComponent from './RadvizComponent';
 import style from './style.module.css';
 
 
@@ -8,6 +8,9 @@ function RadViz(){
     const [scoreData, setScoreData] = useState('');
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
+
+    const dimensions = ['Contribution', 'Stability', 'Popularity', 'Commission', 'Period'];
+    const radius = 200;
 
     useEffect(() => {
         const sendData = async () => {
@@ -24,6 +27,7 @@ function RadViz(){
             throw new Error(`HTTP error! status: ${response.status}`);
             }
             const responseData = await response.json();
+            responseData.sort((a, b) => a.total_score - b.total_score);
             setScoreData(responseData);
         } catch (error) {
             console.error('There was an error!', error);
@@ -37,8 +41,12 @@ function RadViz(){
     }, [scoreData]);
 
     return (
-        <div>
+        <div className={style.container}>
             <label className={style.title}>RadViz</label>
+            <div className={style.radvizContainer}>
+                <RadvizComponent data={scoreData} dimensions={dimensions} radius={radius} />
+            </div>
+            
         </div>
     );
 }
