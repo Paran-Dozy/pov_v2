@@ -4,3 +4,31 @@
     padding-top: 10px;
     padding-left: 10px;
 }
+
+.title {
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+    font-weight: bolder;
+    
+    margin-right: 14px;
+}
+
+.RadHisDiv {
+    width: 250px;
+    height: 250px;
+    margin-top: -30px;
+}
+
+.infoContainer {
+    width: 305px;
+    height: 160px;
+}
+
+.dropdown {
+    height: 20px;
+    width: 138px;
+
+    border: none;
+    background-color: #F9F9F9;
+    border-radius: 30px;
+}

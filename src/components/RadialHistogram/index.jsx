@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
+import RadialHistogramComponent from './RadialHistogramComponent';
+import ValidatorSelectComponent from './ValidatorSelectComponent';
 import style from './style.module.css';
-
 
 function RadialHistogram(){
     const [validatorData, setValidatorData] = useState([])
-    const selectedVoter = 'cosmostation'
+    const selectedVoter = useSelector((state) => state.voter.inputVoter);
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
 
@@ -40,8 +40,11 @@ function RadialHistogram(){
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Validator Info</label>
-            
-            
+            <RadialHistogramComponent validatorData={validatorData} />
+            <ValidatorSelectComponent />
+            <div className={style.infoContainer}>
+
+            </div>
         </div>
     );
 }
