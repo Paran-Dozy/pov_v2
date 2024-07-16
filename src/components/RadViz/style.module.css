@@ -1,22 +1,20 @@
 .container {
     width: 785px;
     height: 420px;
-    /* background-color: blue; */
+    padding-top: 10px;
 }
 
 .title {
     font-family: 'AppleSDGothicNeoT';
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bolder;
 
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 14px;
     margin-right: 14px;
 }
 
 .radvizContainer {
-    padding-top: 5px;
     width: 785px;
     height: 350px;
-    /* background-color: red; */
 }
