@@ -5,8 +5,8 @@ const calculatePositions = (data, dimensions, radius) => {
   const numDimensions = dimensions.length;
   const angleStep = (2 * Math.PI) / numDimensions;
   const anchorPoints = dimensions.map((dim, i) => ({
-    x: radius * Math.cos(i * angleStep),
-    y: radius * Math.sin(i * angleStep),
+    x: radius * Math.cos(i * angleStep - Math.PI / 2),
+    y: radius * Math.sin(i * angleStep - Math.PI / 2),
   }));
 
   return Array.isArray(data) ? data.map((point) => {
@@ -26,16 +26,31 @@ const getColor = (score) => {
 
 const RadvizComponent = ({ data, dimensions, radius }) => {
   const positions = calculatePositions(data, dimensions, radius);
+  const borderColor = "lightgray"; // Set the border color to be lighter
 
   return (
-    <svg className={style.radvizContainer} width={2 * radius} height={2 * radius} viewBox={`-${radius} -${radius} ${2 * radius} ${2 * radius}`}>
+    <svg className={style.radvizContainer} width={2.4 * radius} height={2.4 * radius} viewBox={`-${1.1 * radius} -${1.3 * radius} ${2.3 * radius} ${2.3 * radius}`}>
+      <circle cx={0} cy={0} r={radius} stroke={borderColor} fill="none" />
+      {dimensions.map((dim, i) => {
+        const x = radius * Math.cos(i * ((2 * Math.PI) / dimensions.length) - Math.PI / 2);
+        const y = radius * Math.sin(i * ((2 * Math.PI) / dimensions.length) - Math.PI / 2);
+        return (
+          <React.Fragment key={dim}>
+            <line x1={0} y1={0} x2={x} y2={y} stroke={borderColor} />
+            <circle cx={x} cy={y} r={5} fill={getColor(50)} /> {/* Add circle at the border */}
+            <text
+              x={x * 1.2} // Position the labels further outside the circle
+              y={y * 1.2}
+              textAnchor="middle"
+              alignmentBaseline="middle"
+            >
+              {dim}
+            </text>
+          </React.Fragment>
+        );
+      })}
       {positions.map((pos, index) => (
         <circle key={index} cx={pos.x} cy={pos.y} r={pos.size / 5} fill={getColor(pos.size)} opacity={0.3}/>
-      ))}
-      {dimensions.map((dim, i) => (
-        <text key={dim} x={radius * Math.cos(i * ((2 * Math.PI) / dimensions.length))} y={radius * Math.sin(i * ((2 * Math.PI) / dimensions.length))} textAnchor="middle">
-          {dim}
-        </text>
       ))}
     </svg>
   );
