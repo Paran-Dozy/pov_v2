@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
-import RadViz from '../../components/RadViz';
+import { RadViz, RadialHistogram } from '../../components';
 
 function MainViz(){
     
@@ -12,8 +12,9 @@ function MainViz(){
                 </div>
             </div>
             <div className={style.RadHisContainer}>
-                <div className='Container'></div>
-
+                <div className='Container'>
+                    <RadialHistogram />
+                </div>
             </div>
         </div>
     );
