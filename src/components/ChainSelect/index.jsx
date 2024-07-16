@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { useDispatch } from 'react-redux';
-import { setChain } from '../../store';
+import { setChain, setVoter } from '../../store';
 
 import style from './style.module.css';
 import ChainData from '../../data/chain.json';
@@ -11,6 +11,11 @@ function ChainSelect(){
     
     const handleChange = (event) => {
         dispatch(setChain(event.target.value));
+        ChainData.forEach((chain) => {
+            if(chain.chain_id === event.target.value){
+                dispatch(setVoter(chain.val_list[0]));
+            }
+        });
     }
 
     return (
