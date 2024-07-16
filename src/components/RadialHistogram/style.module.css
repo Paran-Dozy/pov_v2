@@ -6,10 +6,16 @@
 }
 
 .title {
-    font-family: 'AppleSDGothicNeoT';
     font-size: 14px;
     font-weight: bolder;
+}
 
+.label {
+    font-size: 12px;
+}
+
+.title, .label {
+    font-family: 'AppleSDGothicNeoT';
     margin-right: 20px;
 }
 
@@ -22,6 +28,12 @@
 .infoContainer {
     width: 305px;
     height: 160px;
+}
+
+.info {
+    margin-top: 3px;
+    width: 305px;
+    height: 20px;
 }
 
 .dropdown {
