@@ -27,9 +27,9 @@ function LeftSideBar(){
                     )}
                 </div>
             </div>
-            <div className={style.RankingContainer}>
+            <div className={`${style.RankingContainer} ${expanded ? '' : style.RankingContainerExpanded}`}>
                 <div className='Container'>
-                    <Ranking />
+                    <Ranking expanded={expanded} />
                 </div>
             </div>
         </div>

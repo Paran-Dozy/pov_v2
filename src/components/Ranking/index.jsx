@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import style from './style.module.css';
 
 
-function Ranking(){
+function Ranking( {expanded }){
     const [scoreData, setScoreData] = useState('');
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
@@ -64,7 +64,7 @@ function Ranking(){
                 </span>
             </div>
 
-            <div className={style.RankingContainer}>
+            <div className={`${style.RankingContainer} ${expanded ? '' : style.RankingContainerExpanded}`}>
                 {scoreData && scoreData.map((item, index) => (
                     <div key={index}>
                         <p>{item.voter}: {item.total_score}</p>

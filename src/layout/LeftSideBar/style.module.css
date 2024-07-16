@@ -19,6 +19,12 @@
 }
 
 .RankingContainer{
+    height: 310px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.RankingContainerExpanded{
     height: 700px;
     margin-top: 10px;
     margin-bottom: 40px;
