@@ -4,3 +4,60 @@
     padding-left: 14px;
     padding-top: 10px;
 }
+
+.legendContainer {
+    width: 182px;
+    height: 25px;
+
+    padding-top: 5px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.legendSpan {
+    display: flex;
+    flex-direction: row;
+}
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
+    margin-left: 1px;
+    font-size: 10px;
+}
+
+.Contribution {
+    background-color: #8E67FF;
+}
+
+.Stability {
+    background-color: #5B89FF;
+    margin-left: 4px;
+}
+
+.Popularity {
+    background-color: #54B7FF;
+    margin-left: 4px;
+}
+
+.Commission {
+    background-color: #3ADCFF;
+}
+
+.Period {
+    background-color: #1AF3E6;
+    margin-left: 6.5px;
+}
+
+.Contribution, .Stability, .Popularity, .Commission, .Period {
+    width: 10px;
+    height: 10px;
+    border: none;
+    margin-right: 3px;
+}
+
+.RankingContainer {
+    padding-top: 0px;
+}

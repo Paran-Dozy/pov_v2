@@ -33,9 +33,38 @@ function Ranking(){
     }, [inputChain, inputWeight]);
 
     return (
-        <div>
+        <div className={style.container}>
             <label className='ContainerTitle'>Ranking</label>
-            <div>
+
+            <div className={style.legendContainer}>
+                <span className={style.legendSpan}>
+                    <div className={style.legend}>
+                        <div className={style.Contribution} />
+                        Contribution
+                    </div>
+                    <div className={style.legend}>
+                        <div className={style.Stability} />
+                        Stability
+                    </div>
+                    <div className={style.legend}>
+                        <div className={style.Popularity} />
+                        Popularity
+                    </div>
+                </span>
+                <span className={style.legendSpan}>
+                    <div className={style.legend}>
+                    <div className={style.Commission} />
+                        Commission    
+                    </div>
+                    <div className={style.legend}>
+                        <div className={style.Period} />
+                        Period
+                    </div>
+                    <div className={style.legend}></div>
+                </span>
+            </div>
+
+            <div className={style.RankingContainer}>
                 {scoreData && scoreData.map((item, index) => (
                     <div key={index}>
                         <p>{item.voter}: {item.total_score}</p>
