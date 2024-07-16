@@ -78,16 +78,6 @@ function RadialHistogramComponent({ validatorData }) {
             line.setAttribute('stroke', color);
             line.setAttribute('stroke-width', '2');
             svg.appendChild(line);
-
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', x);
-            text.setAttribute('y', y);
-            text.setAttribute('dy', '0.01em');
-            text.setAttribute('text-anchor', 'middle');
-            text.setAttribute('font-size', '10');
-            text.setAttribute('fill', '#333');
-            text.textContent = validator.chain;
-            svg.appendChild(text);
         });
     };
 

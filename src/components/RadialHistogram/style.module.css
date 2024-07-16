@@ -2,15 +2,15 @@
     width: 325px;
     height: 420px;
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
 }
 
 .title {
     font-family: 'AppleSDGothicNeoT';
     font-size: 14px;
     font-weight: bolder;
-    
-    margin-right: 14px;
+
+    margin-right: 25px;
 }
 
 .RadHisDiv {
@@ -26,7 +26,7 @@
 
 .dropdown {
     height: 20px;
-    width: 138px;
+    width: 200px;
 
     border: none;
     background-color: #F9F9F9;
