@@ -66,8 +66,17 @@ function Ranking( {expanded }){
 
             <div className={`${style.RankingContainer} ${expanded ? '' : style.RankingContainerExpanded}`}>
                 {scoreData && scoreData.map((item, index) => (
-                    <div key={index}>
-                        <p>{item.voter}: {item.total_score}</p>
+                    <div key={index} className={style.StackedBarChartContainer}>
+                        <span className={style.rank}>{index + 1}</span>
+                        <span className={style.valName}>{item.voter}</span>
+                        <span className={style.score}>{item.total_score.toFixed(2)}</span>
+                        <div className={style.StackedBarChart}>
+                            <div className={`${style.segment} ${style.cont}`} style={{ width: `${item.contribution_score}%` }}></div>
+                            <div className={`${style.segment} ${style.stab}`} style={{ width: `${item.stability_score}%` }}></div>
+                            <div className={`${style.segment} ${style.pop}`} style={{ width: `${item.popularity_score}%` }}></div>
+                            <div className={`${style.segment} ${style.comm}`} style={{ width: `${item.commission_score}%` }}></div>
+                            <div className={`${style.segment} ${style.per}`} style={{ width: `${item.period_score}%` }}></div>
+                        </div>
                     </div>
                 ))}
             </div>
