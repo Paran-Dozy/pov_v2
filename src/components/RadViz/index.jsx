@@ -36,10 +36,6 @@ function RadViz(){
         sendData();
     }, [inputChain, inputWeight]);
 
-    useEffect(() => {
-        console.log(scoreData);
-    }, [scoreData]);
-
     return (
         <div className={style.container}>
             <label className={style.title}>RadViz</label>

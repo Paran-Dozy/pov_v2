@@ -33,10 +33,6 @@ function RadialHistogram(){
         fetchData();
     }, [selectedVoter, inputWeight]);
 
-    useEffect(() => {
-        console.log(validatorData);
-    }, [validatorData]);
-
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Validator Info</label>

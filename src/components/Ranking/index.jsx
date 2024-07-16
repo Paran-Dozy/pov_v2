@@ -9,7 +9,6 @@ function Ranking(){
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
 
-    
     useEffect(() => {
         const sendData = async () => {
         const data = {"chain": inputChain, "weight": inputWeight};
@@ -33,14 +32,9 @@ function Ranking(){
         sendData();
     }, [inputChain, inputWeight]);
 
-    useEffect(() => {
-        console.log(scoreData);
-    }, [scoreData]);
-
-
     return (
         <div>
-            <label className={style.title}>RadViz</label>
+            <label className='ContainerTitle'>Ranking</label>
             <div>
                 {scoreData && scoreData.map((item, index) => (
                     <div key={index}>

@@ -85,7 +85,6 @@ function RadialHistogramComponent({ validatorData }) {
         if (validatorData.length > 0) {
             drawChart();
         }
-        console.log(weight_score_sum, average_score);
     }, [validatorData]);
 
     return (
