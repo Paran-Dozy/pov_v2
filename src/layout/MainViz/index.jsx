@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 import { RadViz, RadialHistogram } from '../../components';
+import NetworkComponent from '../../components/SimilarityNetwork';
 
 function MainViz(){
     
@@ -8,12 +9,12 @@ function MainViz(){
         <div className={style.MainViz}>
             <div className={style.RadVizContainer}>
                 <div className='Container'>
-                    <RadViz />
+                    <NetworkComponent />
                 </div>
             </div>
             <div className={style.RadHisContainer}>
                 <div className='Container'>
-                    <RadialHistogram />
+
                 </div>
             </div>
         </div>

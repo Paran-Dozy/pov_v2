@@ -20,6 +20,7 @@ src/data/chain.json
 src/data/fin_data.json
 src/data/validator_score.json
 api/valData.csv
+api/nValData.csv
 
 # Editor directories and files
 .vscode/*
