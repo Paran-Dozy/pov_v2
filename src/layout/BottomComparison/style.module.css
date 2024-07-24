@@ -6,24 +6,12 @@
     display: flex;
 }
 
-.RadarChartContainer{
-    width: 325px;
-    margin-right: 10px;
-}
-
-.LineChartContainer{
+.Container{
     width: 555px;
-    margin-right: 10px;
-}
-
-.SelectedListContainer{
-    width: 210px;
-    margin-right: 40px;
-}
-
-.RadarChartContainer, .LineChartContainer, .SelectedListContainer{
     height: 200px;
+
     margin-top: 10px;
     margin-bottom: 40px;
     margin-left: 10px;
+    margin-right: 10px;
 }

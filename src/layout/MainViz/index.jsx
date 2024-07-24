@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './style.module.css';
-import { RadViz, RadialHistogram } from '../../components';
 import NetworkComponent from '../../components/SimilarityNetwork';
 
 function MainViz(){

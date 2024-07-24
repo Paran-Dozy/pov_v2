@@ -1,59 +1,9 @@
 .LeftSideBar{
-    width: 260px;
-    height: 640px;
+    width: 230px;
+    height: 605px;
+
+    margin-left: 30px;
 
     flex-direction: column;
     display: flex;
-}
-
-.UserInputContainer{
-    height: 35px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.FilterContainer{
-    height: 35px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.RankingContainer{
-    height: 310px;
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-.RankingContainerExpanded{
-    height: 700px;
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-.UserInputContainer, .FilterContainer, .RankingContainer{
-    width: 210px;
-
-    margin-left: 40px;
-    margin-right: 10px;
-}
-
-.expanded {
-    height: 255px;
-}
-
-.expandButton {
-    width: 20px;
-    height: 20px;
-    float: right;
-    font-weight: bolder;
-    font-stretch: wider;
-    margin-right: 10px;
-    
-    border: none;
-    background-color: white;   
-}
-
-.UserInputContent {
-    height: 220px;
-    width: 210px;
 }
