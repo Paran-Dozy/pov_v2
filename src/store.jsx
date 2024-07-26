@@ -3,6 +3,13 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const initialState = {
     inputChain: 'akash',
     inputWeight: [3, 3, 3, 3, 3],
+    conditionScore: 70,
+    conditionMissblock: 10,
+    conditionJailed: 0.01,
+    conditionTokenOutlier: 3,
+    conditionParticipation: 0.5,
+    onlyIn: true,
+    inOutPercentage: [0.8, 0.2],
     inputVoter: '0base.vc',
     selectedCircleIds: [],
     selectedChainVals: []
@@ -27,6 +34,35 @@ const weightSlice = createSlice({
         }
     }
 });
+
+const conditionSlice = createSlice({
+    name: 'condition',
+    initialState,
+    reducers: {
+        setConditionScore: (state, action) => {
+            state.conditionScore = action.payload;
+        },
+        setConditionMissblock: (state, action) => {
+            state.conditionMissblock = action.payload;
+        },
+        setConditionJailed: (state, action) => {
+            state.conditionJailed = action.payload;
+        },
+        setConditionTokenOutlier: (state, action) => {
+            state.conditionTokenOutlier = action.payload;
+        },
+        setConditionParticipation: (state, action) => {
+            state.conditionParticipation = action.payload;   
+        }
+    }
+
+});
+
+
+
+
+
+
 
 const voterSlice = createSlice({
     name: 'voter',
@@ -78,6 +114,8 @@ const interestedSlice = createSlice({
 
 export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
+export const { setConditionScore, setConditionMissblock, setConditionJailed, setConditionTokenOutlier, setConditionParticipation } = conditionSlice.actions;
+
 export const { setVoter } = voterSlice.actions;
 export const { toggleCircleId, resetCircleIds } = circleSlice.actions;
 export const { addInterested, removeInterested } = interestedSlice.actions;
@@ -86,6 +124,7 @@ const store = configureStore({
     reducer: {
         chain: chainSlice.reducer,
         weight: weightSlice.reducer,
+        condition: conditionSlice.reducer,
         voter: voterSlice.reducer,
         circles: circleSlice.reducer,
         interested: interestedSlice.reducer
