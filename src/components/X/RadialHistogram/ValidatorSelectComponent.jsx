@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from './style.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import ChainData from '../../data/chain.json';
-import { setVoter } from '../../store';
+import ChainData from '../../../data/chain.json';
+import { setVoter } from '../../../store';
 
 function ValidatorSelectComponent() {
     const [validatorList, setValidatorList] = useState([]);

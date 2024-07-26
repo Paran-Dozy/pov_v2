@@ -1,6 +1,7 @@
 export { default as BottomLineChart} from "./BottomLineChart/index";
 export { default as ChainSelect } from "./ChainSelect";
 export { default as WeightSelect } from "./WeightSelect";
+export { default as RecommendCondition } from './RecommendCondition';
 
 export { default as RadarChartComponent} from "./X/RadarChart/index";
 export { default as RadialHistogram } from './X/RadialHistogram';
