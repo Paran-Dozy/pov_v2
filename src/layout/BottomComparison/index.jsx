@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
+import { RawData } from '../../components';
 
 function BottomComparison(){
     
@@ -12,7 +13,7 @@ function BottomComparison(){
             </div>
             <div className={style.Container}>
                 <div className='Container'>
-                    
+                    <RawData />
                 </div>
             </div>
         </div>
