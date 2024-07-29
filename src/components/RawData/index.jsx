@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import style from './style.module.css';
 
-function RawData( ){
+function RawData() {
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
     const conditionScore = useSelector((state) => parseFloat(state.condition.conditionScore));
@@ -38,21 +38,44 @@ function RawData( ){
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const responseData = await response.json();
+                responseData.sort((a, b) => b.final_score - a.final_score);
                 setRawData(responseData);
             } catch (error) {
                 console.error('There was an error!', error);
             }
         };
         fetchData();
-      }, [setRawData, inputChain, inputWeight, conditionScore, conditionMissblock, conditionJailed, conditionTokenOutlier, conditionParticipation]);
-    
-      useEffect(() => {
+    }, [inputChain, inputWeight, conditionScore, conditionMissblock, conditionJailed, conditionTokenOutlier, conditionParticipation]);
+
+    useEffect(() => {
         console.log(rawData);
-      }, [rawData]);
+    }, [rawData]);
 
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Raw Data</label>
+            <div className={style.tableContainer}>
+                <table className={style.table}>
+                    <thead>
+                        <tr>
+                            <th>#</th> 
+                            {rawData.length > 0 && Object.keys(rawData[0]).map((key) => (
+                                <th key={key}>{key}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rawData.map((row, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                {Object.values(row).map((value, i) => (
+                                    <td key={i}>{value}</td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
