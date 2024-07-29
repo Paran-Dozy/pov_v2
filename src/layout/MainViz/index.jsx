@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
-import NetworkComponent from '../../components/SimilarityNetwork';
+import { SimilarInfo, NetworkComponent } from '../../components';
 
 function MainViz(){
     
@@ -13,7 +13,7 @@ function MainViz(){
             </div>
             <div className={style.RadHisContainer}>
                 <div className='Container'>
-
+                    <SimilarInfo />
                 </div>
             </div>
         </div>
