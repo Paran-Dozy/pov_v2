@@ -1,21 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import '../../styles/history.css';
 import * as d3 from 'd3';
 
-const BottomLineChart = ({ selectedChain }) => {
+const BottomLineChart = () => {
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('rank');
   const selectedCircleIds = useSelector((state) => state.circles.selectedCircleIds);
   const chartRef = useRef(null);
 
+  const inputChain = useSelector((state) => state.chain.inputChain);
+
   const options = ['rank', 'token', 'asset_value', 'commission', 'jailed'];
 
   useEffect(() => {
     const sendData = async () => {
-      const dataToSend = {"chain_id": selectedChain, "selected": selectedCircleIds, "check": selectedOption};
+      const dataToSend = {
+        "chain": inputChain, 
+        "similars": ["chainlayer", "stakin", "cyphercore", "0base.vc", "simplystaking", "westaking"], 
+        "check": 'rank'
+      };
       try {
         const response = await fetch('http://localhost:5002/timeSeriesData', {
             method: 'POST',
@@ -38,7 +42,7 @@ const BottomLineChart = ({ selectedChain }) => {
       }
     };
     sendData();
-  }, [selectedCircleIds, selectedChain, selectedOption]);
+  }, [inputChain]);
 
   useEffect(() => {
     data.sort((a, b) => selectedCircleIds.indexOf(a.val_id) - selectedCircleIds.indexOf(b.val_id));
@@ -54,8 +58,8 @@ const BottomLineChart = ({ selectedChain }) => {
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     svg.selectAll('*').remove();
 
-    const margin = { top: 10, right: 20, bottom: 30, left: 110 },
-      width = 1000 - margin.left - margin.right,
+    const margin = { top: 10, right: 10, bottom: 40, left: 50 },
+      width = 530 - margin.left - margin.right,
       height = 180 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
@@ -189,15 +193,11 @@ const BottomLineChart = ({ selectedChain }) => {
           ))}
         </div>
         <div className="line-chart-container">
-          <svg ref={chartRef} width="1000" height="180"></svg>
+          <svg ref={chartRef} width="530" height="180"></svg>
         </div>
       </div>
     </div>
   );
-};
-
-BottomLineChart.propTypes = {
-  selectedChain: PropTypes.string.isRequired,
 };
 
 export default BottomLineChart;

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
-import { RawData } from '../../components';
+import { RawData, BottomLineChart } from '../../components';
 
 function BottomComparison(){
     
@@ -8,7 +8,7 @@ function BottomComparison(){
         <div className={style.BottomComparison}>
             <div className={style.Container}>
                 <div className='Container'>
-                    
+                    <BottomLineChart />
                 </div>
             </div>
             <div className={style.Container}>
