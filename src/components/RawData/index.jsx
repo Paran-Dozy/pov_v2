@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setVoter } from '../../store';
 import style from './style.module.css';
 
 function RawData() {
@@ -12,6 +13,7 @@ function RawData() {
     const conditionParticipation = useSelector((state) => parseFloat(state.condition.conditionParticipation));
 
     const [rawData, setRawData] = useState([]);
+    const dispatch = useDispatch();
    
     useEffect(() => {
         const fetchData = async () => {
@@ -40,6 +42,8 @@ function RawData() {
                 const responseData = await response.json();
                 responseData.sort((a, b) => b.final_score - a.final_score);
                 setRawData(responseData);
+                const recommendVoter = responseData[0].voter
+                dispatch(setVoter(recommendVoter));
             } catch (error) {
                 console.error('There was an error!', error);
             }
