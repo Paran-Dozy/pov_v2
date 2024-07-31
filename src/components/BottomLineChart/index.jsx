@@ -6,19 +6,18 @@ import * as d3 from 'd3';
 const BottomLineChart = () => {
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('rank');
-  const selectedCircleIds = useSelector((state) => state.circles.selectedCircleIds);
   const chartRef = useRef(null);
 
   const inputChain = useSelector((state) => state.chain.inputChain);
-
+  const inputSimilar = useSelector((state) => state.voter.inputSimilar);
   const options = ['rank', 'token', 'asset_value', 'commission', 'jailed'];
 
   useEffect(() => {
     const sendData = async () => {
       const dataToSend = {
         "chain": inputChain, 
-        "similars": ["chainlayer", "stakin", "cyphercore", "0base.vc", "simplystaking", "westaking"], 
-        "check": 'rank'
+        "similars": inputSimilar, 
+        "check": selectedOption
       };
       try {
         const response = await fetch('http://localhost:5002/timeSeriesData', {
@@ -42,10 +41,10 @@ const BottomLineChart = () => {
       }
     };
     sendData();
-  }, [inputChain]);
+  }, [inputChain, inputSimilar, selectedOption]);
 
   useEffect(() => {
-    data.sort((a, b) => selectedCircleIds.indexOf(a.val_id) - selectedCircleIds.indexOf(b.val_id));
+    data.sort((a, b) => inputSimilar.indexOf(a.voter) - inputSimilar.indexOf(b.voter));
     drawLineChart(data);
   }, [data]);
 
@@ -93,7 +92,7 @@ const BottomLineChart = () => {
     svgChart.append("g")
       .call(d3.axisLeft(y));
 
-    const nestedData = d3.group(data, d => d.val_id);
+    const nestedData = d3.group(data, d => d.voter);
 
     nestedData.forEach((values, key) => {
       values.sort((a, b) => a.record_time - b.record_time);
@@ -165,8 +164,8 @@ const BottomLineChart = () => {
       const date = dataAtX[0].record_time;
       let tooltipHtml = `<strong>${date.toLocaleDateString()}</strong><br/>`;
       dataAtX.forEach(d => {
-        const colorBox = `<span style="background:${color(d.val_id)}; width:10px; height:10px; display:inline-block; margin-right:5px;"></span>`;
-        tooltipHtml += `${colorBox}${d.val_id}: ${d[selectedOption]}<br/>`;
+        const colorBox = `<span style="background:${color(d.voter)}; width:10px; height:10px; display:inline-block; margin-right:5px;"></span>`;
+        tooltipHtml += `${colorBox}${d.voter}: ${d[selectedOption]}<br/>`;
       });
       return tooltipHtml;
     }
