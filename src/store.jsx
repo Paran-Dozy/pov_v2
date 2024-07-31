@@ -11,6 +11,7 @@ const initialState = {
     onlyIn: true,
     inOutPercentage: [0.8, 0.2],
     inputVoter: '0base.vc',
+    inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
     selectedCircleIds: [],
     selectedChainVals: []
 };
@@ -70,6 +71,9 @@ const voterSlice = createSlice({
     reducers: {
         setVoter: (state, action) => {
             state.inputVoter = action.payload;
+        },
+        setSimilar: (state, action) => {
+            state.inputSimilar = action.payload;
         }
     }
 });
@@ -116,7 +120,7 @@ export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
 export const { setConditionScore, setConditionMissblock, setConditionJailed, setConditionTokenOutlier, setConditionParticipation } = conditionSlice.actions;
 
-export const { setVoter } = voterSlice.actions;
+export const { setVoter, setSimilar } = voterSlice.actions;
 export const { toggleCircleId, resetCircleIds } = circleSlice.actions;
 export const { addInterested, removeInterested } = interestedSlice.actions;
 

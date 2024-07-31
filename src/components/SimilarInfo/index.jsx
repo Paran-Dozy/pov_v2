@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSimilar } from '../../store';
 import style from './style.module.css';
 
 function SimilarInfo( ){
@@ -11,8 +12,11 @@ function SimilarInfo( ){
     const conditionJailed = useSelector((state) => parseFloat(state.condition.conditionJailed));
     const conditionTokenOutlier = useSelector((state) => parseFloat(state.condition.conditionTokenOutlier));
     const conditionParticipation = useSelector((state) => parseFloat(state.condition.conditionParticipation));
+    const inputSimilar = useSelector((state) => parseFloat(state.voter.inputSimilar));
 
     const [infoData, setInfoData] = useState([]);
+
+    const dispatch = useDispatch();
    
     useEffect(() => {
         const fetchData = async () => {
@@ -41,6 +45,9 @@ function SimilarInfo( ){
                 }
                 const responseData = await response.json();
                 setInfoData(responseData);
+                const similars = responseData.map(item => item.voter);
+                console.log("hi", similars);
+                dispatch(setSimilar(similars));
             } catch (error) {
                 console.error('There was an error!', error);
             }
@@ -54,7 +61,16 @@ function SimilarInfo( ){
 
     return (
         <div className={style.container}>
-            <label className='ContainerTitle'>Similar Validator Info</label>
+            <div className='ContainerHeader'>
+                <label className='ContainerTitle'>Similar Validator Info</label>
+            </div>
+            <div className={style.sunburst}>
+
+            </div>
+            <div className={style.similarContainer}>
+
+
+            </div>
         </div>
     );
 }
