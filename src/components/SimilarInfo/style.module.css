@@ -1,0 +1,37 @@
+.sunburst{
+    width: 285px;
+    height: 200px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    background-color: red;
+}
+
+.similarContainer {
+    width: 325px;
+    /* height: 165px; */
+    height: 370px;
+    overflow-y: auto;
+}
+
+.accordionInput {
+    display: none;
+}
+
+.accordionLabel {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    margin-left: 10px;
+    font-size: 10px;
+}
+
+.accordionInput:checked ~ .accordionContent {
+    max-height: 500px;
+    background-color: #fafafa;
+}
