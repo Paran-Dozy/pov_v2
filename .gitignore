@@ -12,15 +12,12 @@ dist
 dist-ssr
 *.local
 
-api/fin_score.csv
-api/fin_val.csv
 api/timeSeriesVal.csv
 
 src/data/chain.json
 src/data/fin_data.json
 src/data/validator_score.json
-api/valData.csv
-api/nValData.csv
+api/newData.csv
 
 # Editor directories and files
 .vscode/*
