@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
-import { ChainSelect, WeightSelect, RecommendCondition } from '../../components';
+import { ChainSelect, WeightSelect } from '../../components';
 
 function LeftSideBar(){
     
@@ -12,7 +12,6 @@ function LeftSideBar(){
                 </div>
                 <ChainSelect />
                 <WeightSelect />
-                <RecommendCondition />
             </div>
         </div>
     );

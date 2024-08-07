@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setConditionScore, setConditionMissblock, setConditionJailed, setConditionTokenOutlier, setConditionParticipation } from '../../store';
+import { setConditionScore, setConditionMissblock, setConditionJailed, setConditionTokenOutlier, setConditionParticipation } from '../../../store';
 
 import style from './style.module.css';
 

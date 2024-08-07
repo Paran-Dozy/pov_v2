@@ -4,7 +4,8 @@ const initialState = {
     inputChain: 'akash',
     inputVoter: 'kavalabs',
     inputWeight: [3, 3, 3, 3, 3],
-
+    
+    inOutRatio: [1, 0],
     inputParticipation: [0, 1],
     inputPassed: [0, 1],
     inputMatch: [0, 1],
@@ -17,8 +18,6 @@ const initialState = {
     inputDay: [0, 1143],
 
     inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
-
-    inOutPercentage: [0.8, 0.2],
 };
 
 const chainSlice = createSlice({
@@ -74,6 +73,9 @@ const inputSlice = createSlice({
         },
         setInputDay: (state, action) => {
             state.inputDay = action.payload;
+        },
+        setInOutRatio: (state, action) => {
+            state.inOutRatio = action.payload;
         }
     }
 });
@@ -93,7 +95,7 @@ const voterSlice = createSlice({
 
 export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
-export const { setInputParticipation, setInputPassed, setInputMatch, setInputMissblock, setInputJailedRatio, setInputAssetValue, setInputDelegator, setInputRank, setInputCommission, setInputDay } = inputSlice.actions;
+export const { setInputParticipation, setInputPassed, setInputMatch, setInputMissblock, setInputJailedRatio, setInputAssetValue, setInputDelegator, setInputRank, setInputCommission, setInputDay, setInOutRatio } = inputSlice.actions;
 export const { setVoter, setSimilar } = voterSlice.actions;
 
 const store = configureStore({
