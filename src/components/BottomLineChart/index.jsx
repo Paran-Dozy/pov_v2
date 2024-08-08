@@ -58,7 +58,7 @@ const BottomLineChart = () => {
     svg.selectAll('*').remove();
 
     const margin = { top: 10, right: 10, bottom: 40, left: 50 },
-      width = 530 - margin.left - margin.right,
+      width = 440 - margin.left - margin.right,
       height = 180 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()

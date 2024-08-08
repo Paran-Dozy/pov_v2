@@ -6,12 +6,18 @@
     display: flex;
 }
 
-.Container{
-    width: 555px;
+.LineContainer, .TableContainer{
     height: 200px;
-
     margin-top: 10px;
     margin-bottom: 40px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.LineContainer{
+    width: 460px;
+}
+
+.TableContainer{
+    width: 650px;
 }
