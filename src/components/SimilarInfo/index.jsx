@@ -7,12 +7,19 @@ function SimilarInfo() {
     const inputChain = useSelector((state) => state.chain.inputChain);
     const inputVoter = useSelector((state) => state.voter.inputVoter);
     const inputWeight = useSelector((state) => state.weight.inputWeight);
-    const conditionScore = useSelector((state) => parseFloat(state.condition.conditionScore));
-    const conditionMissblock = useSelector((state) => parseFloat(state.condition.conditionMissblock));
-    const conditionJailed = useSelector((state) => parseFloat(state.condition.conditionJailed));
-    const conditionTokenOutlier = useSelector((state) => parseFloat(state.condition.conditionTokenOutlier));
-    const conditionParticipation = useSelector((state) => parseFloat(state.condition.conditionParticipation));
+    const inOutRatio = useSelector((state) => state.input.inOutRatio);
 
+    const inputParticipation = useSelector((state) => state.input.inputParticipation);
+    const inputPassed = useSelector((state) => state.input.inputPassed);
+    const inputMatch = useSelector((state) => state.input.inputMatch);
+    const inputMissblock = useSelector((state) => state.input.inputMissblock);
+    const inputJailedRatio = useSelector((state) => state.input.inputJailedRatio);
+    const inputAssetValue = useSelector((state) => state.input.inputAssetValue);
+    const inputDelegator = useSelector((state) => state.input.inputDelegator);
+    const inputRank = useSelector((state) => state.input.inputRank);
+    const inputCommission = useSelector((state) => state.input.inputCommission);
+    const inputDay = useSelector((state) => state.input.inputDay);
+    
     const [infoData, setInfoData] = useState([]);
 
     const dispatch = useDispatch();
@@ -20,19 +27,23 @@ function SimilarInfo() {
     useEffect(() => {
         const fetchData = async () => {
             const data = {
-                "chain": inputChain,
+                "chain": inputChain, 
                 "voter": inputVoter,
                 "weight": inputWeight,
-                "score_condition": conditionScore,
-                "missblock": conditionMissblock,
-                "jailed": conditionJailed,
-                "token_outlier": conditionTokenOutlier,
-                "participation": conditionParticipation,
-                "only_in": true,
-                "percentage": [0.5, 0.5]
+                "inout_ratio": inOutRatio,
+                "p_participation": inputParticipation,
+                "p_passed": inputPassed,
+                "p_match": inputMatch,
+                "missblock": inputMissblock,
+                "jailed_ratio": inputJailedRatio,
+                "asset_value": inputAssetValue,
+                "delegator": inputDelegator,
+                "rank": inputRank,
+                "commission": inputCommission,
+                "day": inputDay
             };
             try {
-                const response = await fetch('http://localhost:5002/getSimilarityInfo', {
+                const response = await fetch('http://localhost:5002/getSimilarInfo', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -46,12 +57,13 @@ function SimilarInfo() {
                 setInfoData(responseData);
                 const similars = responseData.map(item => item.voter);
                 dispatch(setSimilar(similars));
+                console.log('similarInfo', responseData);
             } catch (error) {
                 console.error('There was an error!', error);
             }
         };
         fetchData();
-    }, [inputChain, inputVoter, inputWeight, conditionScore, conditionMissblock, conditionJailed, conditionTokenOutlier, conditionParticipation]);
+    }, [inputChain, inputVoter, inputWeight, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
     useEffect(() => {
         console.log(infoData);
@@ -72,7 +84,7 @@ function SimilarInfo() {
                     <div className={style.accordion} key={index}>
                         <input type="checkbox" id={`accordion-${index}`} className={style.accordionInput}/>
                         <label htmlFor={`accordion-${index}`} className={style.accordionLabel}>
-                            {index != 0 ? index + '.' : 'Selected: '} {item.voter}
+                            {index != 0 ? index + '.' : 'Selected: '} {item.voter} <span>{item.grade}</span>
                         </label>
                         <div className={style.accordionContent}>
                             <p>Final Score: {item.final_score}</p>
