@@ -1,6 +1,6 @@
 .title {
     font-family: 'AppleSDGothicNeoT';
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bolder;
 
     margin-top: 0px;
@@ -10,8 +10,10 @@
 
 .dropdown {
     height: 20px;
-    width: 134px;
-
+    width: 200px;
+    margin-top: 5px;
+    margin-left: 14px;
+    margin-bottom: 14px;
     border: none;
     background-color: #F9F9F9;
     border-radius: 30px;

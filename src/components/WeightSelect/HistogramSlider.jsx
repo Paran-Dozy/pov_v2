@@ -3,23 +3,51 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import style from './style.module.css';
 
-function HistogramSlider({ data, onRangeChange }) {
-    const [range, setRange] = useState([0, 0]);
+function HistogramSlider({ data, indicator, range: initialRange, onRangeChange }) {
+    const [range, setRange] = useState(initialRange);
 
     useEffect(() => {
-        const minValue = Math.min(...data);
-        const maxValue = Math.max(...data);
-        setRange([minValue, maxValue]);
-    }, [data]);
+        setRange(initialRange);
+    }, [initialRange]);
 
     const handleRangeChange = (newRange) => {
         setRange(newRange);
         onRangeChange(newRange);
     };
 
-    const minValue = Math.min(...data);
-    const maxValue = Math.max(...data);
-    const numBins = 20; // You can adjust the number of bins
+    const handleInputChange = (index, event) => {
+        const newRange = [...range];
+        newRange[index] = parseFloat(event.target.value) || 0;
+        handleRangeChange(newRange);
+    };
+
+    let minValue, maxValue;
+    switch (indicator) {
+        case 'Participation':
+        case 'Passed':
+        case 'Match':
+        case 'Jailed Ratio':
+        case 'Commission':
+            minValue = 0;
+            maxValue = 1;
+            break;
+        case 'Missblock':
+        case 'Asset Value':
+        case 'Delegator':
+        case 'Day':
+            minValue = 0;
+            maxValue = Math.max(...data);
+            break;
+        case 'Rank':
+            minValue = 1;
+            maxValue = Math.max(...data);
+            break;
+        default:
+            minValue = 0;
+            maxValue = Math.max(...data);
+    }
+
+    const numBins = 20;
     const binWidth = (maxValue - minValue) / numBins;
 
     const bins = Array(numBins).fill(0);
@@ -30,22 +58,39 @@ function HistogramSlider({ data, onRangeChange }) {
 
     const maxBinCount = Math.max(...bins);
 
+    const formatValue = (value) => {
+        switch (indicator) {
+            case 'Participation':
+            case 'Passed':
+            case 'Match':
+            case 'Jailed Ratio':
+                return value.toFixed(4);
+            case 'Commission':
+                return value.toFixed(2);
+            case 'Missblock':
+            case 'Asset Value':
+            case 'Delegator':
+            case 'Rank':
+            case 'Day':
+            default:
+                return Math.round(value);
+        }
+    };
+
     return (
         <div className={style.histogramSliderContainer}>
+            <div className={style.indicatorLabel}>
+                <span>{indicator} Range</span>
+            </div>
             <div className={style.histogramContainer}>
                 {bins.map((count, index) => {
                     const binMinValue = minValue + index * binWidth;
                     const binMaxValue = binMinValue + binWidth;
-                    const barStyle = {
-                        height: `${(count / maxBinCount) * 100}%`,
-                        backgroundColor: (binMinValue >= range[0] && binMaxValue <= range[1]) ? '#d0006f' : '#d3d3d3',
-                        position: 'relative',
-                    };
-                    return <div key={index} className={style.bar} style={barStyle}></div>;
+                    const barClass = (binMinValue >= range[0] && binMaxValue <= range[1]) ? style.selected : style.unselected;
+                    return <div key={index} className={`${style.bar} ${barClass}`} style={{ height: `${(count / maxBinCount) * 100}%` }}></div>;
                 })}
             </div>
             <div className={style.sliderContainer}>
-                <div className={style.rangeLabel}>{range[0]}</div>
                 <Slider
                     range
                     min={minValue}
@@ -54,10 +99,24 @@ function HistogramSlider({ data, onRangeChange }) {
                     value={range}
                     onChange={handleRangeChange}
                     allowCross={false}
-                    trackStyle={[{ backgroundColor: '#d0006f' }]}
-                    handleStyle={[{ borderColor: '#d0006f' }, { borderColor: '#d0006f' }]}
+                    trackStyle={[{ backgroundColor: '#4169E1' }]} // 슬라이더 색상
+                    handleStyle={[{ borderColor: '#4169E1' }, { borderColor: '#4169E1' }]}
                 />
-                <div className={style.rangeLabel}>{range[1]}</div>
+            </div>
+            <div className={style.rangeInputContainer}>
+                <input
+                    type="number"
+                    value={formatValue(range[0])}
+                    onChange={(e) => handleInputChange(0, e)}
+                    className={style.rangeInput}
+                />
+                <span className={style.rangeSeparator}>-</span>
+                <input
+                    type="number"
+                    value={formatValue(range[1])}
+                    onChange={(e) => handleInputChange(1, e)}
+                    className={style.rangeInput}
+                />
             </div>
         </div>
     );

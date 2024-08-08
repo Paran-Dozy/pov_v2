@@ -7,12 +7,15 @@ function LeftSideBar(){
     return (
         <div className={style.LeftSideBar}>
             <div className='Container'>
-                <div className='ContainerHeader'>
-                    <span className='ContainerTitle'>User Input</span>
+                <div className={style.container}>
+                    <div className='ContainerHeader'>
+                        <span className='ContainerTitle'>User Input</span>
+                    </div>
+                    <ChainSelect />
+                    <WeightSelect />
                 </div>
-                <ChainSelect />
-                <WeightSelect />
             </div>
+            
         </div>
     );
 }

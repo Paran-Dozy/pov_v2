@@ -1,9 +1,15 @@
 .LeftSideBar{
     width: 230px;
-    height: 605px;
+    height: 600px;
 
     margin-left: 30px;
 
     flex-direction: column;
     display: flex;
+}
+
+.container {
+    height: 600px;
+    max-height: 600px;
+    overflow-y: scroll;
 }

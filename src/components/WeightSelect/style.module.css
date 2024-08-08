@@ -1,13 +1,39 @@
+.title {
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 16px;
+    font-weight: bolder;
+    padding-top: 8px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+
+.label {
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+    /* font-weight: bolder; */
+}
+
+.slider {
+    width: 100%;
+}
+
+.value {
+    margin-left: 7px;
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+}
+
 .histogramSliderContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
 .histogramContainer {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 77%;
     height: 20px;
     margin-bottom: 20px;
     position: relative;
@@ -15,11 +41,81 @@
 }
 
 .bar {
-    width: 4%;
-    margin: 0 0.5%;
+    width: 4.5%;
+    margin: 0 0.01%;
     position: relative;
     bottom: 0;
 }
+
+
+.bar.selected {
+    background-color: #87CEFA;
+}
+
+.bar.unselected {
+    background-color: #d3d3d3;
+}
+
+.weightSlider {
+
+}
+
 .sliderContainer {
-    width: 70%;
+    width: 75%;
+    margin-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.indicatorArrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 14px;
+    margin-right: 14px;
+    padding: 10px 0;
+}
+
+.sliderWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 14px;
+}
+
+.accordionButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.indicatorLabel {
+    width: 80%;
+    margin-bottom: 5px;
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+}
+
+.rangeInputContainer {
+    width: 100%;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.rangeInput {
+    width: 70px;
+    margin: 0 10px;
+    text-align: center;
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
+}
+
+.rangeSeparator {
+    font-family: 'AppleSDGothicNeoT';
+    font-size: 14px;
 }
