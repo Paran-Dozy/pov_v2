@@ -51,7 +51,7 @@ const RadarChart = ({ infoData }) => {
   };
 
   return (
-    <div style={{ position: 'relative', height: '170px', width: '280px' }}>
+    <div style={{ position: 'relative', height: '150px', width: '280px' }}>
       <Radar data={data} options={options} />
     </div>
   );

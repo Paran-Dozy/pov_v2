@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSimilar } from '../../store';
+import { setInOutRatio, setSimilar } from '../../store';
 import RadarChart from './RadarChart';
 import style from './style.module.css';
 
@@ -64,13 +64,19 @@ function SimilarInfo() {
             }
         };
         fetchData();
-    }, [inputChain, inputVoter, inputWeight, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
+    }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
     useEffect(() => {
         console.log(infoData);
     }, [infoData]);
 
     const sortedInfoData = [...infoData].sort((a, b) => (a.voter === inputVoter ? -1 : b.voter === inputVoter ? 1 : 0));
+
+    const handleSliderChange = (value) => {
+        const inRatio = value / 100;
+        const outRatio = 1 - inRatio;
+        dispatch(setInOutRatio([inRatio, outRatio]));
+    };
 
     return (
         <div>
@@ -79,6 +85,25 @@ function SimilarInfo() {
             </div>
             <div className={style.RadarContainer}>
                 <RadarChart infoData={sortedInfoData.slice(0, 6)}/>
+            </div>
+            <div className={style.sliderContainer}>
+                <label className={style.value}>
+                    In &nbsp;&nbsp;{`${(inOutRatio[0] * 100).toFixed(0)}`}%
+                </label>
+                <div className={style.sliderWrapper}>
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={inOutRatio[0] * 100}
+                        onChange={(e) => handleSliderChange(parseInt(e.target.value))}
+                        className={style.slider}
+                    />
+                    <label className={style.value}> 
+                        {`${(inOutRatio[1] * 100).toFixed(0)}`}% &nbsp;&nbsp;Out
+                    </label>
+                </div>
+                {/* <label>Out</label> */}
             </div>
             <div className={style.similarContainer}>
                 {sortedInfoData.slice(0, 6).map((item, index) => (
