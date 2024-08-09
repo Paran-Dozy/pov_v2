@@ -19,9 +19,6 @@ function RawData() {
     const inputRank = useSelector((state) => state.input.inputRank);
     const inputCommission = useSelector((state) => state.input.inputCommission);
     const inputDay = useSelector((state) => state.input.inputDay);
-    
-
-
 
     const [rawData, setRawData] = useState([]);
     const dispatch = useDispatch();
@@ -57,7 +54,6 @@ function RawData() {
                 }
                 const responseData = await response.json();
                 responseData.sort((a, b) => b.final_score - a.final_score);
-                console.log(responseData);
                 setRawData(responseData);
                 const recommendVoter = responseData[0].voter
                 dispatch(setVoter(recommendVoter));
@@ -67,10 +63,6 @@ function RawData() {
         };
         fetchData();
     }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
-
-    useEffect(() => {
-        console.log(rawData);
-    }, [rawData]);
 
     return (
         <div className={style.container}>

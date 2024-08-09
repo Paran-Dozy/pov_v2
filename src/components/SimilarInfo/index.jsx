@@ -58,17 +58,12 @@ function SimilarInfo() {
                 setInfoData(responseData);
                 const similars = responseData.map(item => item.voter);
                 dispatch(setSimilar(similars));
-                console.log('similarInfo', responseData);
             } catch (error) {
                 console.error('There was an error!', error);
             }
         };
         fetchData();
     }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
-
-    useEffect(() => {
-        console.log(infoData);
-    }, [infoData]);
 
     const sortedInfoData = [...infoData].sort((a, b) => (a.voter === inputVoter ? -1 : b.voter === inputVoter ? 1 : 0));
 
