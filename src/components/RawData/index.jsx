@@ -66,7 +66,7 @@ function RawData() {
             }
         };
         fetchData();
-    }, [inputChain, inputVoter, inputWeight, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
+    }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
     useEffect(() => {
         console.log(rawData);
