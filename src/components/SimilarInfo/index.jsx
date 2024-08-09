@@ -84,7 +84,7 @@ function SimilarInfo() {
                 {sortedInfoData.slice(0, 6).map((item, index) => (
                     <div className={style.valContainer} key={index}>
                         <label className={style.valLabel}>
-                            <span className={style.rank}>{item.rank}</span> 
+                            <span className={style.index}>{item.index}</span> 
                             <span className={style.voter}>{item.voter}</span> 
                             <span 
                                 className={`${style.finalScore} ${item.final_score > 80 ? style.green : item.final_score > 60 ? style.lightGreen : item.final_score > 50 ? style.orange : style.red}`}
