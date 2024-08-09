@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSimilar } from '../../store';
+import RadarChart from './RadarChart';
 import style from './style.module.css';
 
 function SimilarInfo() {
@@ -77,7 +78,7 @@ function SimilarInfo() {
                 <label className='ContainerTitle'>Similar Validator Info</label>
             </div>
             <div className={style.RadarContainer}>
-
+                <RadarChart infoData={sortedInfoData.slice(0, 6)}/>
             </div>
             <div className={style.similarContainer}>
                 {sortedInfoData.slice(0, 6).map((item, index) => (
