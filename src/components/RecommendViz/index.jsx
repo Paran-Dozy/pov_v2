@@ -108,20 +108,24 @@ const RecommendViz = () => {
 
             let color;
             if (voter.final_score > 80) {
-                color = 'green';
+                color = '#47924a';
+                node.setAttribute('opacity', '0.9');
             } else if (voter.final_score > 65) {
-                color = 'lightgreen';
+                color = '#8BC34A';
+                node.setAttribute('opacity', '0.6');
             } else if (voter.final_score > 50) {
-                color = 'orange';
+                color = '#FF9800';
+                node.setAttribute('opacity', '0.6');
             } else {
-                color = 'red';
+                color = '#F44336';
+                node.setAttribute('opacity', '0.6');
             }
 
             node.setAttribute('cx', x);
             node.setAttribute('cy', y);
             node.setAttribute('r', voter.final_score / 5);
             node.setAttribute('fill', color);
-            node.setAttribute('opacity', '0.7');
+            
             svg.appendChild(node);
 
             if (index === 0) {

@@ -98,7 +98,6 @@ function SimilarInfo() {
                         {`${(inOutRatio[1] * 100).toFixed(0)}`}% &nbsp;&nbsp;Out
                     </label>
                 </div>
-                {/* <label>Out</label> */}
             </div>
             <div className={style.similarContainer}>
                 {sortedInfoData.slice(0, 6).map((item, index) => (
@@ -118,7 +117,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.inScoreBar}`} 
                                 style={{ 
                                     '--in-score': item.in_score, 
-                                    '--bar-color': item.in_score > 80 ? '#4CAF50' : item.in_score > 60 ? '#8BC34A' : item.in_score > 50 ? '#FF9800' : '#F44336' 
+                                    '--bar-color': item.in_score > 80 ? '#47924a' : item.in_score > 65 ? '#8BC34A' : item.in_score > 50 ? '#FF9800' : '#F44336' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -129,7 +128,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.outScoreBar}`} 
                                 style={{ 
                                     '--out-score': item.out_score, 
-                                    '--bar-color': item.out_score > 80 ? '#4CAF50' : item.out_score > 60 ? '#8BC34A' : item.out_score > 50 ? '#FF9800' : '#F44336' 
+                                    '--bar-color': item.out_score > 80 ? '#47924a' : item.out_score > 65 ? '#8BC34A' : item.out_score > 50 ? '#FF9800' : '#F44336' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>
