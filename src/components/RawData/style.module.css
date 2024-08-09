@@ -1,13 +1,16 @@
 /* style.module.css */
 .container {
-    padding: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 14px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
 }
 
 .tableContainer {
-    max-height: 150px; /* Set the height according to your needs */
+    max-height: 140px;
+    margin-top: 5px;
     overflow-y: auto;
 }
 
