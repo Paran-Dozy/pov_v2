@@ -1,37 +1,95 @@
-.sunburst{
+.RadarContainer{
     width: 285px;
-    height: 200px;
+    height: 170px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;
-    background-color: red;
+    margin-top: 0px;
+    /* background-color: red; */
 }
 
 .similarContainer {
-    width: 325px;
-    /* height: 165px; */
-    height: 370px;
+    width: 285px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-height: 190px;
     overflow-y: auto;
 }
 
-.accordionInput {
-    display: none;
+.valContainer {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.accordionLabel {
-    display: block;
-    padding: 10px;
-    cursor: pointer;
+.rank, .voter {
+    font-size: 14px;
 }
-
-.accordionContent {
-    max-height: 0;
-    overflow: hidden;
+.font {
     margin-left: 10px;
-    font-size: 10px;
+    font-size: 12px;
 }
 
-.accordionInput:checked ~ .accordionContent {
-    max-height: 500px;
-    background-color: #fafafa;
+.voter {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.finalScore {
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    float: right;
+}
+
+.green {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.lightGreen {
+    background-color: #8BC34A;
+    color: white;
+}
+
+.orange {
+    background-color: #FF9800;
+    color: white;
+}
+
+.red {
+    background-color: #F44336;
+    color: white;
+}
+
+.scoreBarContainer {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    margin-top: 5px;
+}
+
+.scoreLabel {
+    max-width: 60px;
+    min-width: 60px;
+    font-size: 12px;
+}
+
+.scoreBar {
+    height: 10px;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.inScoreBar {
+    width: calc(var(--in-score) * 1% * 0.6);
+    background-color: var(--bar-color);
+}
+
+.outScoreBar {
+    width: calc(var(--out-score) * 1% * 0.6);
+    background-color: var(--bar-color);
 }

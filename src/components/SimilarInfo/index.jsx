@@ -76,34 +76,48 @@ function SimilarInfo() {
             <div className='ContainerHeader'>
                 <label className='ContainerTitle'>Similar Validator Info</label>
             </div>
-            {/* <div className={style.sunburst}>
+            <div className={style.RadarContainer}>
 
-            </div> */}
+            </div>
             <div className={style.similarContainer}>
-                {sortedInfoData.map((item, index) => (
-                    <div className={style.accordion} key={index}>
-                        <input type="checkbox" id={`accordion-${index}`} className={style.accordionInput}/>
-                        <label htmlFor={`accordion-${index}`} className={style.accordionLabel}>
-                            {index != 0 ? index + '.' : 'Selected: '} {item.voter} <span>{item.grade}</span>
+                {sortedInfoData.slice(0, 6).map((item, index) => (
+                    <div className={style.valContainer} key={index}>
+                        <label className={style.valLabel}>
+                            <span className={style.rank}>{item.rank}</span> 
+                            <span className={style.voter}>{item.voter}</span> 
+                            <span 
+                                className={`${style.finalScore} ${item.final_score > 80 ? style.green : item.final_score > 60 ? style.lightGreen : item.final_score > 50 ? style.orange : style.red}`}
+                            >
+                                {item.final_score.toFixed(2)}
+                            </span>
                         </label>
-                        <div className={style.accordionContent}>
-                            <p>Final Score: {item.final_score}</p>
-                            <p>Chain Count: {item.chain_num}</p>
-                            {/* <p>Contribution: {item.contribution_score}</p>
-                            <p>Stability: {item.stability_score}</p>
-                            <p>Popularity: {item.popularity_score}</p>
-                            <p>Commission: {item.commission_score}</p>
-                            <p>Period: {item.period_score}</p> */}
-                            <p>Missblock: {item.missblock}</p>
-                            <p>Jailed Ratio: {item.jailed_ratio}</p>
-                            <p>Proposal Participation: {item.p_participation}</p>
-                            <p>Token Variance Outlier: {item.n_outlier}</p>
-                            
-                        </div>
+                        <label className={style.scoreBarContainer}>
+                            <div className={style.scoreLabel}>In score:</div>
+                            <div 
+                                className={`${style.scoreBar} ${style.inScoreBar}`} 
+                                style={{ 
+                                    '--in-score': item.in_score, 
+                                    '--bar-color': item.in_score > 80 ? '#4CAF50' : item.in_score > 60 ? '#8BC34A' : item.in_score > 50 ? '#FF9800' : '#F44336' 
+                                }}
+                            ></div>
+                            <label className={style.font}>{item.in_score.toFixed(2)}</label>
+                        </label>
+                        <label className={style.scoreBarContainer}>
+                            <span className={style.scoreLabel}>Out score:</span>
+                            <div 
+                                className={`${style.scoreBar} ${style.outScoreBar}`} 
+                                style={{ 
+                                    '--out-score': item.out_score, 
+                                    '--bar-color': item.out_score > 80 ? '#4CAF50' : item.out_score > 60 ? '#8BC34A' : item.out_score > 50 ? '#FF9800' : '#F44336' 
+                                }}
+                            ></div>
+                            <label className={style.font}>{item.out_score.toFixed(2)}</label>
+                        </label>
                     </div>
                 ))}
             </div>
         </div>
+
     );
 }
 
