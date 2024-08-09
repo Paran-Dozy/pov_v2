@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import * as d3 from 'd3';
 
+import style from './style.module.css';
+
 const BottomLineChart = () => {
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('rank');
@@ -59,7 +61,7 @@ const BottomLineChart = () => {
 
     const margin = { top: 10, right: 10, bottom: 40, left: 50 },
       width = 440 - margin.left - margin.right,
-      height = 180 - margin.top - margin.bottom;
+      height = 150 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
       .domain(d3.extent(data, d => d.record_time))
@@ -172,28 +174,30 @@ const BottomLineChart = () => {
   };
 
   return (
-    <div className="history-in">
-      <div>
-          <label>History</label>
+    <div>
+      <div className={style.container}>
+        <div className={style.LabelContainer}>
+          <label className="ContainerTitle">History</label>
+        </div>
+        <div className={style.RadioContainer}>
+          <div className={style['radio-buttons']}>
+            {options.map((option) => (
+              <label key={option} className={style['radio-label']}>
+                <input
+                  type="radio"
+                  value={option}
+                  checked={selectedOption === option}
+                  onChange={handleRadioChange}
+                  className={style['radio-input']}
+                />
+                <span>{option.charAt(0).toUpperCase() + option.slice(1)}</span>
+              </label>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="history-container">
-        <div className="radio-buttons">
-          {options.map(option => (
-            <label key={option} className="radio-label">
-              <input
-                type="radio"
-                value={option}
-                checked={selectedOption === option}
-                onChange={handleRadioChange}
-                className="radio-input"
-              />
-              <span>{option}</span>
-            </label>
-          ))}
-        </div>
-        <div className="line-chart-container">
-          <svg ref={chartRef} width="530" height="180"></svg>
-        </div>
+      <div className={style.LineContainer}>
+        <svg ref={chartRef} width="530" height="180"></svg>
       </div>
     </div>
   );

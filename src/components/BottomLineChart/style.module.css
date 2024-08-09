@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.LabelContainer {
+    padding-left: 14px;
+    padding-top: 14px;
+    padding-right: 40px;
+    padding-bottom: 0px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.RadioContainer {
+    padding-top: 10px;
+}
+
+.radio-buttons {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
+
+.radio-label {
+    font-size: 15px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.radio-input {
+    display: none;
+    transform: translateY(100%);
+}
+
+.radio-label span {
+    display: block;
+    position: relative;
+}
+
+.radio-input:checked + span {
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+    position: relative;
+    transform: translateY(-10%);
+}
+
+.radio-input:checked + span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background-color: #4169E1;
+    border-radius: 5px;
+}
+
+.LineContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
