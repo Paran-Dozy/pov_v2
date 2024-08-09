@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.module.css';
-import { SimilarInfo, NetworkComponent } from '../../components';
+import { SimilarInfo, RecommendViz } from '../../components';
 
 function MainViz(){
     
@@ -8,7 +8,7 @@ function MainViz(){
         <div className={style.MainViz}>
             <div className={style.RadVizContainer}>
                 <div className='Container'>
-                    <NetworkComponent />
+                    <RecommendViz />
                 </div>
             </div>
             <div className={style.RadHisContainer}>
