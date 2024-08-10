@@ -21,6 +21,7 @@ const RecommendViz = () => {
 
     const [similarityData, setSimilarityData] = useState([]);
     const svgRef = useRef();
+    const previousPositions = useRef({}); // Store the previous positions of nodes
 
     useEffect(() => {
         const fetchData = async () => {
@@ -106,80 +107,83 @@ const RecommendViz = () => {
         });
 
         const nodes = svg.selectAll('circle.node')
-            .data(similarityData)
-            .join('circle')
-            .attr('class', 'node')
-            .attr('fill', (d) => {
-                if (d.final_score > 80) return '#47924a';
-                if (d.final_score > 65) return '#8BC34A';
-                if (d.final_score > 50) return '#FF9800';
-                return '#F44336';
-            })
-            .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))
-            .attr('r', (d) => d.final_score / 5);
+            .data(similarityData, d => d.voter) // Use 'voter' as a key for stable selection
+            .join(
+                enter => enter.append('circle')
+                    .attr('class', 'node')
+                    .attr('fill', (d) => {
+                        if (d.final_score > 80) return '#47924a';
+                        if (d.final_score > 65) return '#8BC34A';
+                        if (d.final_score > 50) return '#FF9800';
+                        return '#F44336';
+                    })
+                    .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))
+                    .attr('r', (d) => d.final_score / 5)
+                    .attr('cx', (d) => previousPositions.current[d.voter]?.x || centerX)
+                    .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
+                    .call(enter => enter.transition().duration(750)
+                        .attr('cx', (d, index) => {
+                            let radius, angle;
 
-        nodes.transition()
-            .duration(750)
-            .attr('cx', (d, index) => {
-                let radius, angle;
+                            if (index === 0) {
+                                radius = 0;
+                                angle = 0;
+                            } else {
+                                if (d.similarity >= 0.5) {
+                                    radius = 50 + (1 - d.similarity) * 100;
+                                } else if (d.similarity > 0) {
+                                    radius = 100 + (0.5 - d.similarity) * 100;
+                                } else {
+                                    radius = 150 + Math.abs(d.similarity) * 50;
+                                }
+                                angle = (d.degree * Math.PI) / 180;
+                            }
 
-                if (index === 0) {
-                    radius = 0;
-                    angle = 0;
-                } else {
-                    if (d.similarity >= 0.5) {
-                        radius = 50 + (1 - d.similarity) * 100;
-                    } else if (d.similarity > 0) {
-                        radius = 100 + (0.5 - d.similarity) * 100;
-                    } else {
-                        radius = 150 + Math.abs(d.similarity) * 50;
-                    }
-                    angle = (d.degree * Math.PI) / 180;
-                }
+                            const x = centerX + radius * Math.cos(angle);
+                            previousPositions.current[d.voter] = { x, y: centerY + radius * Math.sin(angle) };
+                            return x;
+                        })
+                        .attr('cy', (d, index) => previousPositions.current[d.voter].y)
+                    ),
+                update => update
+                    .call(update => update.transition().duration(750)
+                        .attr('cx', (d, index) => {
+                            let radius, angle;
 
-                return centerX + radius * Math.cos(angle);
-            })
-            .attr('cy', (d, index) => {
-                let radius, angle;
+                            if (index === 0) {
+                                radius = 0;
+                                angle = 0;
+                            } else {
+                                if (d.similarity >= 0.5) {
+                                    radius = 50 + (1 - d.similarity) * 100;
+                                } else if (d.similarity > 0) {
+                                    radius = 100 + (0.5 - d.similarity) * 100;
+                                } else {
+                                    radius = 150 + Math.abs(d.similarity) * 50;
+                                }
+                                angle = (d.degree * Math.PI) / 180;
+                            }
 
-                if (index === 0) {
-                    radius = 0;
-                    angle = 0;
-                } else {
-                    if (d.similarity >= 0.5) {
-                        radius = 50 + (1 - d.similarity) * 100;
-                    } else if (d.similarity > 0) {
-                        radius = 100 + (0.5 - d.similarity) * 100;
-                    } else {
-                        radius = 150 + Math.abs(d.similarity) * 50;
-                    }
-                    angle = (d.degree * Math.PI) / 180;
-                }
+                            const x = centerX + radius * Math.cos(angle);
+                            previousPositions.current[d.voter] = { x, y: centerY + radius * Math.sin(angle) };
+                            return x;
+                        })
+                        .attr('cy', (d, index) => previousPositions.current[d.voter].y)
+                    )
+            );
 
-                return centerY + radius * Math.sin(angle);
-            });
+        // Add central node's name in the middle
+        if (similarityData.length > 0) {
+            svg.append('text')
+                .attr('class', 'central-node-label')
+                .attr('x', centerX)
+                .attr('y', centerY - 10)
+                .attr('text-anchor', 'middle')
+                .attr('fill', 'black')
+                .attr('font-size', '14px')
+                .text(similarityData[0].voter);
+        }
 
-        svg.selectAll('text.node-label')
-            .data(similarityData)
-            .join('text')
-            .attr('class', 'node-label')
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'black')
-            .attr('x', (d, index) => {
-                if (index === 0) {
-                    let radius = 0;
-                    let angle = 0;
-                    return centerX + radius * Math.cos(angle);
-                }
-            })
-            .attr('y', (d, index) => {
-                if (index === 0) {
-                    let radius = 0;
-                    let angle = 0;
-                    return centerY + radius * Math.sin(angle) + 5;
-                }
-            })
-            .text((d) => (d.index === 0 ? d.voter : ''));
     }, [similarityData]);
 
     return (
