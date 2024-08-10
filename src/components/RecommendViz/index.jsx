@@ -68,6 +68,7 @@ const RecommendViz = () => {
         const height = 420;
         const centerX = width / 2;
         const centerY = height / 2;
+        const labels = ['contribution', 'stability', 'popularity', 'commission', 'period'];
 
         svg.innerHTML = '';
 
@@ -82,6 +83,28 @@ const RecommendViz = () => {
             circle.setAttribute('stroke-width', '1');
             circle.setAttribute('fill', 'none');
             svg.appendChild(circle);
+        });
+
+        labels.forEach((label, index) => {
+            const angle = (index * 72 - 90) * (Math.PI / 180);
+            const radius = 150;
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+
+            const point = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            point.setAttribute('cx', x);
+            point.setAttribute('cy', y);
+            point.setAttribute('r', 4);
+            point.setAttribute('fill', 'lightgrey');
+            svg.appendChild(point);
+
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', x);
+            text.setAttribute('y', y - 10);
+            text.setAttribute('fill', 'lightgrey');
+            text.setAttribute('text-anchor', 'middle');
+            text.textContent = label;
+            svg.appendChild(text);
         });
 
         similarityData.forEach((voter, index) => {
@@ -133,6 +156,7 @@ const RecommendViz = () => {
                 text.setAttribute('x', x);
                 text.setAttribute('y', y + 5);
                 text.setAttribute('fill', 'black');
+                text.setAttribute('text-anchor', 'middle');
                 text.textContent = voter.voter;
                 svg.appendChild(text);
             }
