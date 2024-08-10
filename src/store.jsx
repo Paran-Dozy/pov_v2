@@ -2,7 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     inputChain: 'akash',
-    inputVoter: 'kavalabs',
+    inputVoter: 'omniflixnetwork',
     inputWeight: [3, 3, 3, 3, 3],
     
     inOutRatio: [1, 0],
@@ -19,7 +19,7 @@ const initialState = {
 
     inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
 
-    selected: true
+    selected: false
 };
 
 const chainSlice = createSlice({
