@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import * as d3 from 'd3';
 
 const RecommendViz = () => {
     const inputChain = useSelector((state) => state.chain.inputChain);
@@ -63,26 +64,25 @@ const RecommendViz = () => {
     useEffect(() => {
         if (!similarityData || similarityData.length === 0) return;
 
-        const svg = svgRef.current;
+        const svg = d3.select(svgRef.current);
         const width = 785;
         const height = 420;
         const centerX = width / 2;
         const centerY = height / 2;
         const labels = ['contribution', 'stability', 'popularity', 'commission', 'period'];
 
-        svg.innerHTML = '';
+        svg.selectAll('*').remove();
 
         const circles = [50, 100, 150];
         circles.forEach(radius => {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', centerX);
-            circle.setAttribute('cy', centerY);
-            circle.setAttribute('r', radius);
-            circle.setAttribute('stroke', 'lightgrey');
-            circle.setAttribute('opacity', '0.4');
-            circle.setAttribute('stroke-width', '1');
-            circle.setAttribute('fill', 'none');
-            svg.appendChild(circle);
+            svg.append('circle')
+                .attr('cx', centerX)
+                .attr('cy', centerY)
+                .attr('r', radius)
+                .attr('stroke', 'lightgrey')
+                .attr('opacity', '0.4')
+                .attr('stroke-width', '1')
+                .attr('fill', 'none');
         });
 
         labels.forEach((label, index) => {
@@ -91,76 +91,95 @@ const RecommendViz = () => {
             const x = centerX + radius * Math.cos(angle);
             const y = centerY + radius * Math.sin(angle);
 
-            const point = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            point.setAttribute('cx', x);
-            point.setAttribute('cy', y);
-            point.setAttribute('r', 4);
-            point.setAttribute('fill', 'lightgrey');
-            svg.appendChild(point);
+            svg.append('circle')
+                .attr('cx', x)
+                .attr('cy', y)
+                .attr('r', 4)
+                .attr('fill', 'lightgrey');
 
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', x);
-            text.setAttribute('y', y - 10);
-            text.setAttribute('fill', 'lightgrey');
-            text.setAttribute('text-anchor', 'middle');
-            text.textContent = label;
-            svg.appendChild(text);
+            svg.append('text')
+                .attr('x', x)
+                .attr('y', y - 10)
+                .attr('fill', 'lightgrey')
+                .attr('text-anchor', 'middle')
+                .text(label);
         });
 
-        similarityData.forEach((voter, index) => {
-            const node = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            let radius, angle;
+        const nodes = svg.selectAll('circle.node')
+            .data(similarityData)
+            .join('circle')
+            .attr('class', 'node')
+            .attr('fill', (d) => {
+                if (d.final_score > 80) return '#47924a';
+                if (d.final_score > 65) return '#8BC34A';
+                if (d.final_score > 50) return '#FF9800';
+                return '#F44336';
+            })
+            .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))
+            .attr('r', (d) => d.final_score / 5);
 
-            if (index === 0) {
-                radius = 0;
-                angle = 0;
-                voter.final_score += 50;
-            } else {
-                if (voter.similarity >= 0.5) {
-                    radius = 50 + (1 - voter.similarity) * 100;
-                } else if (voter.similarity > 0) {
-                    radius = 100 + (0.5 - voter.similarity) * 100;
+        nodes.transition()
+            .duration(750)
+            .attr('cx', (d, index) => {
+                let radius, angle;
+
+                if (index === 0) {
+                    radius = 0;
+                    angle = 0;
                 } else {
-                    radius = 150 + Math.abs(voter.similarity) * 50;
+                    if (d.similarity >= 0.5) {
+                        radius = 50 + (1 - d.similarity) * 100;
+                    } else if (d.similarity > 0) {
+                        radius = 100 + (0.5 - d.similarity) * 100;
+                    } else {
+                        radius = 150 + Math.abs(d.similarity) * 50;
+                    }
+                    angle = (d.degree * Math.PI) / 180;
                 }
-                angle = (voter.degree * Math.PI) / 180;
-            }
 
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
+                return centerX + radius * Math.cos(angle);
+            })
+            .attr('cy', (d, index) => {
+                let radius, angle;
 
-            let color;
-            if (voter.final_score > 80) {
-                color = '#47924a';
-                node.setAttribute('opacity', '0.9');
-            } else if (voter.final_score > 65) {
-                color = '#8BC34A';
-                node.setAttribute('opacity', '0.6');
-            } else if (voter.final_score > 50) {
-                color = '#FF9800';
-                node.setAttribute('opacity', '0.6');
-            } else {
-                color = '#F44336';
-                node.setAttribute('opacity', '0.6');
-            }
+                if (index === 0) {
+                    radius = 0;
+                    angle = 0;
+                } else {
+                    if (d.similarity >= 0.5) {
+                        radius = 50 + (1 - d.similarity) * 100;
+                    } else if (d.similarity > 0) {
+                        radius = 100 + (0.5 - d.similarity) * 100;
+                    } else {
+                        radius = 150 + Math.abs(d.similarity) * 50;
+                    }
+                    angle = (d.degree * Math.PI) / 180;
+                }
 
-            node.setAttribute('cx', x);
-            node.setAttribute('cy', y);
-            node.setAttribute('r', voter.final_score / 5);
-            node.setAttribute('fill', color);
-            
-            svg.appendChild(node);
+                return centerY + radius * Math.sin(angle);
+            });
 
-            if (index === 0) {
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', x);
-                text.setAttribute('y', y + 5);
-                text.setAttribute('fill', 'black');
-                text.setAttribute('text-anchor', 'middle');
-                text.textContent = voter.voter;
-                svg.appendChild(text);
-            }
-        });
+        svg.selectAll('text.node-label')
+            .data(similarityData)
+            .join('text')
+            .attr('class', 'node-label')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'black')
+            .attr('x', (d, index) => {
+                if (index === 0) {
+                    let radius = 0;
+                    let angle = 0;
+                    return centerX + radius * Math.cos(angle);
+                }
+            })
+            .attr('y', (d, index) => {
+                if (index === 0) {
+                    let radius = 0;
+                    let angle = 0;
+                    return centerY + radius * Math.sin(angle) + 5;
+                }
+            })
+            .text((d) => (d.index === 0 ? d.voter : ''));
     }, [similarityData]);
 
     return (
@@ -168,6 +187,6 @@ const RecommendViz = () => {
             <svg ref={svgRef} width="785" height="420"></svg>
         </div>
     );
-}
+};
 
 export default RecommendViz;
