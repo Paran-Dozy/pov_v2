@@ -12,13 +12,17 @@ function HistogramSlider({ data, indicator, range: initialRange, onRangeChange }
 
     const handleRangeChange = (newRange) => {
         setRange(newRange);
+    };
+
+    const handleAfterChange = (newRange) => {
         onRangeChange(newRange);
     };
 
     const handleInputChange = (index, event) => {
         const newRange = [...range];
         newRange[index] = parseFloat(event.target.value) || 0;
-        handleRangeChange(newRange);
+        setRange(newRange);
+        onRangeChange(newRange);
     };
 
     let minValue, maxValue;
@@ -98,6 +102,7 @@ function HistogramSlider({ data, indicator, range: initialRange, onRangeChange }
                     step={binWidth}
                     value={range}
                     onChange={handleRangeChange}
+                    onAfterChange={handleAfterChange}
                     allowCross={false}
                     trackStyle={[{ backgroundColor: '#87CEFA' }]} // 슬라이더 색상
                     handleStyle={[{ borderColor: '#87CEFA' }, { borderColor: '#87CEFA' }]}

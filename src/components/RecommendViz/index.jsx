@@ -107,7 +107,7 @@ const RecommendViz = () => {
         });
 
         const nodes = svg.selectAll('circle.node')
-            .data(similarityData, d => d.voter) // Use 'voter' as a key for stable selection
+            .data(similarityData, d => d.voter)
             .join(
                 enter => enter.append('circle')
                     .attr('class', 'node')
@@ -172,12 +172,11 @@ const RecommendViz = () => {
                     )
             );
 
-        // Add central node's name in the middle
         if (similarityData.length > 0) {
             svg.append('text')
                 .attr('class', 'central-node-label')
                 .attr('x', centerX)
-                .attr('y', centerY - 10)
+                .attr('y', centerY + 4)
                 .attr('text-anchor', 'middle')
                 .attr('fill', 'black')
                 .attr('font-size', '14px')
