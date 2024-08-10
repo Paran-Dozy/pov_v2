@@ -34,7 +34,7 @@
     justify-content: space-between;
     width: 77%;
     height: 20px;
-    margin-bottom: 20px;
+    margin-bottom: -5px;
     position: relative;
     align-items: flex-end;
 }
