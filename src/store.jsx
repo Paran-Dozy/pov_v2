@@ -18,6 +18,8 @@ const initialState = {
     inputDay: [0, 1143],
 
     inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
+
+    selected: true
 };
 
 const chainSlice = createSlice({
@@ -93,17 +95,30 @@ const voterSlice = createSlice({
     }
 });
 
+const selectSlice = createSlice({
+    name: 'select',
+    initialState,
+    reducers: {
+        setSelected: (state, action) => {
+            state.selected = action.payload;
+        }
+    }
+});
+
+
 export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
 export const { setInputParticipation, setInputPassed, setInputMatch, setInputMissblock, setInputJailedRatio, setInputAssetValue, setInputDelegator, setInputRank, setInputCommission, setInputDay, setInOutRatio } = inputSlice.actions;
 export const { setVoter, setSimilar } = voterSlice.actions;
+export const { setSelected } = selectSlice.actions;
 
 const store = configureStore({
     reducer: {
         chain: chainSlice.reducer,
         weight: weightSlice.reducer,
         input: inputSlice.reducer,
-        voter: voterSlice.reducer
+        voter: voterSlice.reducer,
+        select: selectSlice.reducer
     }
 });
 

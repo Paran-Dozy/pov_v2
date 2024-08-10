@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelected, setVoter } from '../../store'; // Import setVoter
 import * as d3 from 'd3';
+import styles from './style.module.css'; // Import the CSS module
 
 const RecommendViz = () => {
     const inputChain = useSelector((state) => state.chain.inputChain);
@@ -19,9 +21,12 @@ const RecommendViz = () => {
     const inputCommission = useSelector((state) => state.input.inputCommission);
     const inputDay = useSelector((state) => state.input.inputDay);
 
+    const selected = useSelector((state) => state.select.selected);
+    const dispatch = useDispatch();
+
     const [similarityData, setSimilarityData] = useState([]);
     const svgRef = useRef();
-    const previousPositions = useRef({}); // Store the previous positions of nodes
+    const previousPositions = useRef({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,7 +44,8 @@ const RecommendViz = () => {
                 "delegator": inputDelegator,
                 "rank": inputRank,
                 "commission": inputCommission,
-                "day": inputDay
+                "day": inputDay,
+                "selected": selected
             };
             try {
                 const response = await fetch('http://localhost:5002/getSimilarity', {
@@ -60,7 +66,7 @@ const RecommendViz = () => {
             }
         };
         fetchData();
-    }, [setSimilarityData, inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
+    }, [setSimilarityData, selected, inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
     useEffect(() => {
         if (!similarityData || similarityData.length === 0) return;
@@ -106,6 +112,11 @@ const RecommendViz = () => {
                 .text(label);
         });
 
+        const handleClick = (voter) => {
+            dispatch(setVoter(voter));  // Dispatch setVoter with the clicked voter's name
+            dispatch(setSelected(true)); // Dispatch setSelected with true
+        };
+
         const nodes = svg.selectAll('circle.node')
             .data(similarityData, d => d.voter)
             .join(
@@ -121,6 +132,7 @@ const RecommendViz = () => {
                     .attr('r', (d) => d.final_score / 5)
                     .attr('cx', (d) => previousPositions.current[d.voter]?.x || centerX)
                     .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
+                    .on('click', (event, d) => handleClick(d.voter))  // Attach the click event
                     .call(enter => enter.transition().duration(750)
                         .attr('cx', (d, index) => {
                             let radius, angle;
@@ -183,11 +195,26 @@ const RecommendViz = () => {
                 .text(similarityData[0].voter);
         }
 
-    }, [similarityData]);
+    }, [similarityData, dispatch]);
 
     return (
         <div>
             <svg ref={svgRef} width="785" height="420"></svg>
+            <div className={styles.container}>
+                <div 
+                    className={`${styles.button} ${!selected ? styles.selected : styles.unselected}`}
+                    onClick={() => dispatch(setSelected(false))}
+                >
+                    Recommend
+                </div>
+                <div 
+                    className={`${styles.button} ${selected ? styles.selected : styles.unselected}`}
+                    onClick={() => dispatch(setSelected(true))}
+                >
+                    Select
+                </div>
+            </div>
+            
         </div>
     );
 };

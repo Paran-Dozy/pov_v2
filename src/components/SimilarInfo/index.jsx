@@ -20,6 +20,8 @@ function SimilarInfo() {
     const inputRank = useSelector((state) => state.input.inputRank);
     const inputCommission = useSelector((state) => state.input.inputCommission);
     const inputDay = useSelector((state) => state.input.inputDay);
+
+    const selected = useSelector((state) => state.select.selected);
     
     const [infoData, setInfoData] = useState([]);
     const [sliderValue, setSliderValue] = useState(inOutRatio[0] * 100);
@@ -42,7 +44,8 @@ function SimilarInfo() {
                 "delegator": inputDelegator,
                 "rank": inputRank,
                 "commission": inputCommission,
-                "day": inputDay
+                "day": inputDay,
+                "selected": selected
             };
             try {
                 const response = await fetch('http://localhost:5002/getSimilarInfo', {
@@ -64,7 +67,7 @@ function SimilarInfo() {
             }
         };
         fetchData();
-    }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
+    }, [selected, inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
     const sortedInfoData = [...infoData].sort((a, b) => (a.voter === inputVoter ? -1 : b.voter === inputVoter ? 1 : 0));
 

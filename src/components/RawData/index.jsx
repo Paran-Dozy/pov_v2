@@ -27,7 +27,6 @@ function RawData() {
         const fetchData = async () => {
             const data = {
                 "chain": inputChain, 
-                "voter": inputVoter,
                 "weight": inputWeight,
                 "inout_ratio": inOutRatio,
                 "p_participation": inputParticipation,
@@ -55,8 +54,6 @@ function RawData() {
                 const responseData = await response.json();
                 responseData.sort((a, b) => b.final_score - a.final_score);
                 setRawData(responseData);
-                const recommendVoter = responseData[0].voter
-                dispatch(setVoter(recommendVoter));
             } catch (error) {
                 console.error('There was an error!', error);
             }

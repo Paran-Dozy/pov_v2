@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+    position: absolute;
+    right: 413px;
+    top: 430px;
+}
+
+.button {
+    padding: 5px 10px;
+    border: 1px solid #4169E1;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 16px;
+    width: 100px;
+    text-align: center;
+}
+
+.button:last-child {
+    margin-right: 0;
+}
+
+.selected {
+    background-color: #e7f0fa;
+}
+
+.unselected {
+    background-color: #fff;
+}
