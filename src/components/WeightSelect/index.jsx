@@ -80,12 +80,19 @@ function WeightSelect() {
                 setRank(responseData['rank']);
                 setCommission(responseData['commission']);
                 setDay(responseData['day']);
+
+                dispatch(setInputMissblock([0, Math.max(...responseData['missblock'])]));
+                dispatch(setInputAssetValue([0, Math.max(...responseData['asset_value'])]));
+                dispatch(setInputDelegator([0, Math.max(...responseData['delegator'])]));
+                dispatch(setInputRank([1, Math.max(...responseData['rank'])]));
+                dispatch(setInputCommission([0, Math.max(...responseData['commission'])]));
+                dispatch(setInputDay([0, Math.max(...responseData['day'])]));
             } catch (error) {
                 console.error('There was an error!', error);
             }
         };
         fetchData();
-    }, [inputChain]);
+    }, [inputChain, dispatch]);
 
     const getHistogramData = (index) => {
         switch (index) {
