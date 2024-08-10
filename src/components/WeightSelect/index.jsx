@@ -11,7 +11,7 @@ import style from './style.module.css';
 
 function WeightSelect() {
     const dispatch = useDispatch();
-    const [weights, setWeights] = useState([3, 3, 3, 3, 3]);
+    const [sliderValues, setSliderValues] = useState([3, 3, 3, 3, 3]);
 
     const [isOpen, setIsOpen] = useState([false, false, false, false, false]);
 
@@ -41,9 +41,13 @@ function WeightSelect() {
     const inputChain = useSelector((state) => state.chain.inputChain);
 
     const handleSliderChange = (index, value) => {
-        const newWeights = [...weights];
-        newWeights[index] = value;
-        setWeights(newWeights);
+        const newSliderValues = [...sliderValues];
+        newSliderValues[index] = value;
+        setSliderValues(newSliderValues);
+    };
+
+    const handleSliderMouseUp = (index) => {
+        const newWeights = [...sliderValues];
         dispatch(setWeight(newWeights));
     };
 
@@ -160,7 +164,7 @@ function WeightSelect() {
     return (
         <div>
             <div className={style.title}>Weight</div>
-            {weights.map((weight, index) => (
+            {sliderValues.map((sliderValue, index) => (
                 <div key={index} className={style.weightSlider}>
                     <div className={style.header}>
                         <span className={style.indicatorArrow}>
@@ -177,11 +181,12 @@ function WeightSelect() {
                                 type="range"
                                 min="0"
                                 max="5"
-                                value={weight}
+                                value={sliderValue}
                                 onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                onMouseUp={() => handleSliderMouseUp(index)}
                                 className={style.slider}
                             />
-                            <span className={style.value}>{weight}</span>
+                            <span className={style.value}>{sliderValue}</span>
                         </div>
                     </div>
                     {isOpen[index] && (

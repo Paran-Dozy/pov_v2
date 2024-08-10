@@ -22,6 +22,7 @@ function SimilarInfo() {
     const inputDay = useSelector((state) => state.input.inputDay);
     
     const [infoData, setInfoData] = useState([]);
+    const [sliderValue, setSliderValue] = useState(inOutRatio[0] * 100);
 
     const dispatch = useDispatch();
 
@@ -68,7 +69,11 @@ function SimilarInfo() {
     const sortedInfoData = [...infoData].sort((a, b) => (a.voter === inputVoter ? -1 : b.voter === inputVoter ? 1 : 0));
 
     const handleSliderChange = (value) => {
-        const inRatio = value / 100;
+        setSliderValue(value);
+    };
+
+    const handleSliderMouseUp = () => {
+        const inRatio = sliderValue / 100;
         const outRatio = 1 - inRatio;
         dispatch(setInOutRatio([inRatio, outRatio]));
     };
@@ -83,19 +88,20 @@ function SimilarInfo() {
             </div>
             <div className={style.sliderContainer}>
                 <label className={style.value}>
-                    In &nbsp;&nbsp;{`${(inOutRatio[0] * 100).toFixed(0)}`}%
+                    In &nbsp;&nbsp;{`${sliderValue}`}%
                 </label>
                 <div className={style.sliderWrapper}>
                     <input
                         type="range"
                         min="0"
                         max="100"
-                        value={inOutRatio[0] * 100}
+                        value={sliderValue}
                         onChange={(e) => handleSliderChange(parseInt(e.target.value))}
+                        onMouseUp={handleSliderMouseUp}
                         className={style.slider}
                     />
                     <label className={style.value}> 
-                        {`${(inOutRatio[1] * 100).toFixed(0)}`}% &nbsp;&nbsp;Out
+                        {`${100 - sliderValue}`}% &nbsp;&nbsp;Out
                     </label>
                 </div>
             </div>
