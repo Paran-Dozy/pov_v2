@@ -21,24 +21,26 @@ function RawData() {
     const inputDay = useSelector((state) => state.input.inputDay);
 
     const [rawData, setRawData] = useState([]);
+    const [sortedData, setSortedData] = useState([]);
+    const [sortConfig, setSortConfig] = useState({ key: 'final_score', direction: 'descending' });
     const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
             const data = {
-                "chain": inputChain, 
-                "weight": inputWeight,
-                "inout_ratio": inOutRatio,
-                "p_participation": inputParticipation,
-                "p_passed": inputPassed,
-                "p_match": inputMatch,
-                "missblock": inputMissblock,
-                "jailed_ratio": inputJailedRatio,
-                "asset_value": inputAssetValue,
-                "delegator": inputDelegator,
-                "rank": inputRank,
-                "commission": inputCommission,
-                "day": inputDay
+                chain: inputChain, 
+                weight: inputWeight,
+                inout_ratio: inOutRatio,
+                p_participation: inputParticipation,
+                p_passed: inputPassed,
+                p_match: inputMatch,
+                missblock: inputMissblock,
+                jailed_ratio: inputJailedRatio,
+                asset_value: inputAssetValue,
+                delegator: inputDelegator,
+                rank: inputRank,
+                commission: inputCommission,
+                day: inputDay
             };
             try {
                 const response = await fetch('http://localhost:5002/getRaw', {
@@ -54,6 +56,7 @@ function RawData() {
                 const responseData = await response.json();
                 responseData.sort((a, b) => b.final_score - a.final_score);
                 setRawData(responseData);
+                setSortedData(responseData);
             } catch (error) {
                 console.error('There was an error!', error);
             }
@@ -66,6 +69,45 @@ function RawData() {
         dispatch(setSelected(true));
     };
 
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+
+        const sorted = [...sortedData].sort((a, b) => {
+            if (a[key] < b[key]) {
+                return direction === 'ascending' ? -1 : 1;
+            }
+            if (a[key] > b[key]) {
+                return direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+
+        setSortedData(sorted);
+        setSortConfig({ key, direction });
+    };
+
+    const resetSort = () => {
+        setSortedData(rawData);
+        setSortConfig({ key: 'final_score', direction: 'descending' });
+    };
+
+    const getSortIndicator = (key) => {
+        if (sortConfig.key === key) {
+            return sortConfig.direction === 'ascending' ? '▲' : '▼';
+        }
+        return '';
+    };
+
+    const getRank = (index) => {
+        const sortedByScore = [...sortedData].sort((a, b) => b.final_score - a.final_score);
+        const rank = sortedByScore.findIndex((item) => item.final_score === sortedData[index].final_score) + 1;
+
+        return rank;
+    };
+
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Raw Data</label>
@@ -73,16 +115,22 @@ function RawData() {
                 <table className={style.table}>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            {rawData.length > 0 && Object.keys(rawData[0]).map((key) => (
-                                <th key={key}>{key}</th>
+                            <th onClick={resetSort} style={{ cursor: 'pointer' }}>#</th>
+                            {sortedData.length > 0 && Object.keys(sortedData[0]).map((key) => (
+                                <th 
+                                    key={key} 
+                                    onClick={() => handleSort(key)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {key} {getSortIndicator(key)}
+                                </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {rawData.map((row, index) => (
+                        {sortedData.map((row, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
+                                <td>{getRank(index)}</td>
                                 {Object.entries(row).map(([key, value], i) => (
                                     <td 
                                         key={i} 
