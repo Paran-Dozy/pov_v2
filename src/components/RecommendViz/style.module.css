@@ -1,10 +1,17 @@
+.svgContainer {
+    position: absolute;
+    top: 70px;
+    left: 300px;
+    transform: translateY(-20px);
+}
+
 .container {
     display: flex;
     justify-content: right;
     margin-bottom: 20px;
-    position: absolute;
-    right: 413px;
-    top: 430px;
+    position: relative;
+    right: 5px;
+    top: 275px;
 }
 
 .button {
@@ -28,4 +35,32 @@
 
 .unselected {
     background-color: #fff;
+}
+
+.legendContainer {
+    box-sizing: border-box;
+    margin-right: 20px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 150px;
+    padding: 10px;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legendColor {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.legendLabel {
+    font-size: 12px;
+    color: #333;
 }

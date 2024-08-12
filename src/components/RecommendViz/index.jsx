@@ -222,9 +222,28 @@ const RecommendViz = () => {
 
     }, [similarityData, dispatch]);
 
+    const legendData = [
+        { color: '#006327', label: 'Recommend' },
+        { color: '#58A270', label: 'Good' },
+        { color: '#8CE4C8', label: 'Caution' },
+        { color: '#ccece6', label: 'Not Recommend' },
+    ];
+
     return (
         <div>
-            <svg ref={svgRef} width="785" height="420"></svg>
+            <div className={styles.legendContainer}>
+                {legendData.map((item, index) => (
+                    <div key={index} className={styles.legendItem}>
+                        <div
+                            className={styles.legendColor}
+                            style={{ backgroundColor: item.color }}
+                        ></div>
+                        <span className={styles.legendLabel}>{item.label}</span>
+                    </div>
+                ))}
+                
+            </div>
+            <svg ref={svgRef} width="785" height="420" className={styles.svgContainer}></svg>
             <div className={styles.container}>
                 <div 
                     className={`${styles.button} ${!selected ? styles.selected : styles.unselected}`}
