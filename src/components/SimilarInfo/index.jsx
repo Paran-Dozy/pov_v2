@@ -127,12 +127,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--in-score': item.in_score, 
                                     backgroundColor: item.in_score > 80 
-                                        ? 'rgba(1, 108, 89, 0.8)'   // #016c59 with 0.8 opacity
+                                        ? 'rgba(1, 108, 89, 0.8)'
                                         : item.in_score > 65 
-                                        ? 'rgba(28, 144, 153, 0.8)'  // #1c9099 with 0.8 opacity
+                                        ? 'rgba(28, 144, 153, 0.8)'
                                         : item.in_score > 50 
-                                        ? 'rgba(103, 169, 207, 0.8)' // #67a9cf with 0.8 opacity
-                                        : 'rgba(166, 189, 219, 0.8)' // #a6bddb with 0.8 opacity
+                                        ? 'rgba(103, 169, 207, 0.8)'
+                                        : 'rgba(166, 189, 219, 0.8)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -144,12 +144,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--out-score': item.out_score, 
                                     backgroundColor: item.out_score > 80 
-                                        ? 'rgba(1, 108, 89, 0.8)'   // #016c59 with 0.8 opacity
+                                        ? 'rgba(1, 108, 89, 0.8)'
                                         : item.out_score > 65 
-                                        ? 'rgba(28, 144, 153, 0.8)'  // #1c9099 with 0.8 opacity
+                                        ? 'rgba(28, 144, 153, 0.8)'
                                         : item.out_score > 50 
-                                        ? 'rgba(103, 169, 207, 0.8)' // #67a9cf with 0.8 opacity
-                                        : 'rgba(166, 189, 219, 0.8)' // #a6bddb with 0.8 opacity
+                                        ? 'rgba(103, 169, 207, 0.8)'
+                                        : 'rgba(166, 189, 219, 0.8)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>
