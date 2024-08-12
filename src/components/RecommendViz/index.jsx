@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelected, setVoter } from '../../store'; // Import setVoter
+import { setSelected, setVoter } from '../../store';
 import * as d3 from 'd3';
-import styles from './style.module.css'; // Import the CSS module
+import styles from './style.module.css';
 
 const RecommendViz = () => {
     const inputChain = useSelector((state) => state.chain.inputChain);
@@ -109,12 +109,13 @@ const RecommendViz = () => {
                 .attr('y', y - 10)
                 .attr('fill', 'lightgrey')
                 .attr('text-anchor', 'middle')
-                .text(label);
+                .text(label)
+                .attr('pointer-events', 'none');
         });
 
         const handleClick = (voter) => {
-            dispatch(setVoter(voter));  // Dispatch setVoter with the clicked voter's name
-            dispatch(setSelected(true)); // Dispatch setSelected with true
+            dispatch(setVoter(voter));  
+            dispatch(setSelected(true)); 
         };
 
         const nodes = svg.selectAll('circle.node')
@@ -132,7 +133,27 @@ const RecommendViz = () => {
                     .attr('r', (d) => d.final_score / 5)
                     .attr('cx', (d) => previousPositions.current[d.voter]?.x || centerX)
                     .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
-                    .on('click', (event, d) => handleClick(d.voter))  // Attach the click event
+                    .on('click', (event, d) => handleClick(d.voter))  
+                    .on('mouseover', (event, d) => {
+                        d3.select(event.currentTarget)
+                            .attr('opacity', 1);
+                    
+                        svg.append('text')
+                            .attr('id', 'tooltip')
+                            .attr('x', previousPositions.current[d.voter].x)
+                            .attr('y', previousPositions.current[d.voter].y + 4)
+                            .attr('text-anchor', 'middle')
+                            .attr('font-size', '12px')
+                            .attr('fill', 'black')
+                            .attr('pointer-events', 'none')
+                            .text(d.voter);
+                    })
+                    .on('mouseout', (event, d) => {
+                        d3.select(event.currentTarget)
+                            .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'));
+                    
+                        svg.select('#tooltip').remove();
+                    })
                     .call(enter => enter.transition().duration(750)
                         .attr('cx', (d, index) => {
                             let radius, angle;
