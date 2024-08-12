@@ -115,7 +115,7 @@ function SimilarInfo() {
                             <span className={style.index}>{item.index}</span> 
                             <span className={style.voter}>{item.voter}</span> 
                             <span 
-                                className={`${style.finalScore} ${item.final_score > 80 ? style.green : item.final_score > 60 ? style.lightGreen : item.final_score > 50 ? style.orange : style.red}`}
+                                className={`${style.finalScore} ${item.final_score > 80 ? style.green : item.final_score > 65 ? style.lightGreen : item.final_score > 50 ? style.orange : style.red}`}
                             >
                                 {item.final_score.toFixed(2)}
                             </span>
