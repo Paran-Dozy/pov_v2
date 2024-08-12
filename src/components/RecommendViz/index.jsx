@@ -173,7 +173,7 @@ const RecommendViz = () => {
                                 } else {
                                     radius = 150 + Math.abs(d.similarity) * 50;
                                 }
-                                angle = (d.degree * Math.PI) / 180;
+                                angle = ((d.degree - 90) * Math.PI) / 180;
                             }
 
                             const x = centerX + radius * Math.cos(angle);
@@ -198,7 +198,7 @@ const RecommendViz = () => {
                                 } else {
                                     radius = 150 + Math.abs(d.similarity) * 50;
                                 }
-                                angle = (d.degree * Math.PI) / 180;
+                                angle = ((d.degree - 90) * Math.PI) / 180;
                             }
 
                             const x = centerX + radius * Math.cos(angle);
