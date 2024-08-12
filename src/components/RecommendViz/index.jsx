@@ -228,12 +228,6 @@ const RecommendViz = () => {
                 >
                     Recommend
                 </div>
-                <div 
-                    className={`${styles.button} ${selected ? styles.selected : styles.unselected}`}
-                    onClick={() => dispatch(setSelected(true))}
-                >
-                    Select
-                </div>
             </div>
             
         </div>
