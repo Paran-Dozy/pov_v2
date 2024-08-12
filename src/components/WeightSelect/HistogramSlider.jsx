@@ -104,8 +104,8 @@ function HistogramSlider({ data, indicator, range: initialRange, onRangeChange }
                     onChange={handleRangeChange}
                     onAfterChange={handleAfterChange}
                     allowCross={false}
-                    trackStyle={[{ backgroundColor: '#87CEFA' }]} // 슬라이더 색상
-                    handleStyle={[{ borderColor: '#87CEFA' }, { borderColor: '#87CEFA' }]}
+                    trackStyle={[{ backgroundColor: '#A6DDFF' }]}
+                    handleStyle={[{ borderColor: '#A6DDFF' }, { borderColor: '#A6DDFF' }]}
                 />
             </div>
             <div className={style.rangeInputContainer}>
