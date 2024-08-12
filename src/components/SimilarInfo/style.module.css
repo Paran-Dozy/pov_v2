@@ -74,23 +74,26 @@
     float: right;
 }
 
-.green {
-    background-color: #47924a;
+.color_one {
+    background-color: #006327;
+    opacity: 0.7;
     color: white;
 }
 
-.lightGreen {
-    background-color: #8BC34A;
+.color_two {
+    background-color: #58A270;
+    opacity: 0.7;
     color: white;
 }
 
-.orange {
-    background-color: #FF9800;
+.color_three {
+    background-color: #8CE4C8;
+    opacity: 0.7;
     color: white;
 }
 
-.red {
-    background-color: #F44336;
+.color_four {
+    background-color: #CCECE6;
     color: white;
 }
 

@@ -124,9 +124,9 @@ const RecommendViz = () => {
                 enter => enter.append('circle')
                     .attr('class', 'node')
                     .attr('fill', (d) => {
-                        if (d.final_score > 80) return '#00441b';
-                        if (d.final_score > 65) return '#238b45';
-                        if (d.final_score > 50) return '#66c2a4';
+                        if (d.final_score > 80) return '#006327';
+                        if (d.final_score > 65) return '#58A270';
+                        if (d.final_score > 50) return '#8CE4C8';
                         return '#ccece6';
                     })
                     .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))

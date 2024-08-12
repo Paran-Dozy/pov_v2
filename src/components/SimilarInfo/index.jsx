@@ -115,7 +115,7 @@ function SimilarInfo() {
                             <span className={style.index}>{item.index}</span> 
                             <span className={style.voter}>{item.voter}</span> 
                             <span 
-                                className={`${style.finalScore} ${item.final_score > 80 ? style.green : item.final_score > 65 ? style.lightGreen : item.final_score > 50 ? style.orange : style.red}`}
+                                className={`${style.finalScore} ${item.final_score > 80 ? style.color_one : item.final_score > 65 ? style.color_two : item.final_score > 50 ? style.color_three : style.color_four}`}
                             >
                                 {item.final_score.toFixed(2)}
                             </span>
@@ -126,7 +126,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.inScoreBar}`} 
                                 style={{ 
                                     '--in-score': item.in_score, 
-                                    '--bar-color': item.in_score > 80 ? '#8CC581' : item.in_score > 65 ? '#B2E07C' : item.in_score > 50 ? '#FFCC82' : '#FF8C83' 
+                                    '--bar-color': item.in_score > 80 ? '#006327' : item.in_score > 65 ? '#58A270' : item.in_score > 50 ? '#8CE4C8' : '#CCECE6' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -137,7 +137,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.outScoreBar}`} 
                                 style={{ 
                                     '--out-score': item.out_score, 
-                                    '--bar-color': item.out_score > 80 ? '#8CC581' : item.out_score > 65 ? '#B2E07C' : item.out_score > 50 ? '#FFCC82' : '#FF8C83' 
+                                    '--bar-color': item.out_score > 80 ? '#006327' : item.out_score > 65 ? '#58A270' : item.out_score > 50 ? '#8CE4C8' : '#CCECE6' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>
