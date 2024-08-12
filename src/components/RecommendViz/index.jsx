@@ -124,10 +124,10 @@ const RecommendViz = () => {
                 enter => enter.append('circle')
                     .attr('class', 'node')
                     .attr('fill', (d) => {
-                        if (d.final_score > 80) return '#47924a';
-                        if (d.final_score > 65) return '#8BC34A';
-                        if (d.final_score > 50) return '#FF9800';
-                        return '#F44336';
+                        if (d.final_score > 80) return '#00441b';
+                        if (d.final_score > 65) return '#238b45';
+                        if (d.final_score > 50) return '#66c2a4';
+                        return '#ccece6';
                     })
                     .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))
                     .attr('r', (d) => d.final_score / 5)
@@ -135,24 +135,28 @@ const RecommendViz = () => {
                     .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
                     .on('click', (event, d) => handleClick(d.voter))  
                     .on('mouseover', (event, d) => {
-                        d3.select(event.currentTarget)
-                            .attr('opacity', 1);
-                    
-                        svg.append('text')
-                            .attr('id', 'tooltip')
-                            .attr('x', previousPositions.current[d.voter].x)
-                            .attr('y', previousPositions.current[d.voter].y + 4)
-                            .attr('text-anchor', 'middle')
-                            .attr('font-size', '12px')
-                            .attr('fill', 'black')
-                            .attr('pointer-events', 'none')
-                            .text(d.voter);
+                        if (d !== similarityData[0]) {
+                            d3.select(event.currentTarget)
+                                .attr('opacity', 0.9);
+
+                            svg.append('text')
+                                .attr('id', 'tooltip')
+                                .attr('x', previousPositions.current[d.voter].x)
+                                .attr('y', previousPositions.current[d.voter].y + 4)
+                                .attr('text-anchor', 'middle')
+                                .attr('font-size', '12px')
+                                .attr('fill', 'black')
+                                .attr('pointer-events', 'none')
+                                .text(d.voter);
+                        }
                     })
                     .on('mouseout', (event, d) => {
-                        d3.select(event.currentTarget)
-                            .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'));
-                    
-                        svg.select('#tooltip').remove();
+                        if (d !== similarityData[0]) {
+                            d3.select(event.currentTarget)
+                                .attr('opacity', 0.6);
+
+                            svg.select('#tooltip').remove();
+                        }
                     })
                     .call(enter => enter.transition().duration(750)
                         .attr('cx', (d, index) => {
