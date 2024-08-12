@@ -1,6 +1,6 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setVoter } from '../../store';
+import { setVoter, setSelected } from '../../store';
 import style from './style.module.css';
 
 function RawData() {
@@ -22,7 +22,7 @@ function RawData() {
 
     const [rawData, setRawData] = useState([]);
     const dispatch = useDispatch();
-   
+
     useEffect(() => {
         const fetchData = async () => {
             const data = {
@@ -61,6 +61,11 @@ function RawData() {
         fetchData();
     }, [inputChain, inputVoter, inputWeight, inOutRatio, inputParticipation, inputPassed, inputMatch, inputMissblock, inputJailedRatio, inputAssetValue, inputDelegator, inputRank, inputCommission, inputDay]);
 
+    const handleVoterClick = (voter) => {
+        dispatch(setVoter(voter));
+        dispatch(setSelected(true));
+    };
+
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Raw Data</label>
@@ -68,7 +73,7 @@ function RawData() {
                 <table className={style.table}>
                     <thead>
                         <tr>
-                            <th>#</th> 
+                            <th>#</th>
                             {rawData.length > 0 && Object.keys(rawData[0]).map((key) => (
                                 <th key={key}>{key}</th>
                             ))}
@@ -78,8 +83,14 @@ function RawData() {
                         {rawData.map((row, index) => (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                {Object.values(row).map((value, i) => (
-                                    <td key={i}>{value}</td>
+                                {Object.entries(row).map(([key, value], i) => (
+                                    <td 
+                                        key={i} 
+                                        onClick={key === 'voter' ? () => handleVoterClick(value) : null}
+                                        className={key === 'voter' ? style.clickable : ''}
+                                    >
+                                        {value}
+                                    </td>
                                 ))}
                             </tr>
                         ))}
