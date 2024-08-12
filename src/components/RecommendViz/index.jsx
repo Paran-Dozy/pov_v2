@@ -25,6 +25,7 @@ const RecommendViz = () => {
     const dispatch = useDispatch();
 
     const [similarityData, setSimilarityData] = useState([]);
+    const [selectedLegends, setSelectedLegends] = useState([]);
     const svgRef = useRef();
     const previousPositions = useRef({});
 
@@ -124,12 +125,18 @@ const RecommendViz = () => {
                 enter => enter.append('circle')
                     .attr('class', 'node')
                     .attr('fill', (d) => {
-                        if (d.final_score > 80) return '#006327';
-                        if (d.final_score > 65) return '#58A270';
-                        if (d.final_score > 50) return '#8CE4C8';
-                        return '#ccece6';
+                        if (d.final_score > 80) return '#016c59';
+                        if (d.final_score > 65) return '#1c9099';
+                        if (d.final_score > 50) return '#67a9cf';
+                        return '#a6bddb';
                     })
-                    .attr('opacity', (d, i) => (i === 0 ? '0.9' : '0.6'))
+                    .attr('opacity', (d) => {
+                        const nodeColor = getNodeColor(d.final_score);
+                        if (selectedLegends.length === 0 || selectedLegends.includes(nodeColor)) {
+                            return d.voter === similarityData[0].voter ? '0.9' : '0.6';
+                        }
+                        return '0.2';
+                    })
                     .attr('r', (d) => d.final_score / 5)
                     .attr('cx', (d) => previousPositions.current[d.voter]?.x || centerX)
                     .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
@@ -137,7 +144,7 @@ const RecommendViz = () => {
                     .on('mouseover', (event, d) => {
                         if (d !== similarityData[0]) {
                             d3.select(event.currentTarget)
-                                .attr('opacity', 0.9);
+                                .attr('opacity', 0.8);
 
                             svg.append('text')
                                 .attr('id', 'tooltip')
@@ -153,7 +160,7 @@ const RecommendViz = () => {
                     .on('mouseout', (event, d) => {
                         if (d !== similarityData[0]) {
                             d3.select(event.currentTarget)
-                                .attr('opacity', 0.6);
+                                .attr('opacity', selectedLegends.length === 0 || selectedLegends.includes(getNodeColor(d.final_score)) ? 0.6 : 0.2);
 
                             svg.select('#tooltip').remove();
                         }
@@ -220,20 +227,41 @@ const RecommendViz = () => {
                 .text(similarityData[0].voter);
         }
 
-    }, [similarityData, dispatch]);
+    }, [similarityData, dispatch, selectedLegends]);
 
     const legendData = [
-        { color: '#006327', label: 'Recommend' },
-        { color: '#58A270', label: 'Good' },
-        { color: '#8CE4C8', label: 'Caution' },
-        { color: '#ccece6', label: 'Not Recommend' },
+        { color: '#016c59', label: 'Recommend' },
+        { color: '#1c9099', label: 'Good' },
+        { color: '#67a9cf', label: 'Caution' },
+        { color: '#a6bddb', label: 'Not Recommend' },
     ];
+
+    const handleLegendClick = (color) => {
+        setSelectedLegends((prevSelectedLegends) => {
+            if (prevSelectedLegends.includes(color)) {
+                return prevSelectedLegends.filter((item) => item !== color);
+            } else {
+                return [...prevSelectedLegends, color];
+            }
+        });
+    };
+
+    const getNodeColor = (score) => {
+        if (score > 80) return '#016c59';
+        if (score > 65) return '#1c9099';
+        if (score > 50) return '#67a9cf';
+        return '#a6bddb';
+    };
 
     return (
         <div>
             <div className={styles.legendContainer}>
                 {legendData.map((item, index) => (
-                    <div key={index} className={styles.legendItem}>
+                    <div 
+                        key={index} 
+                        className={`${styles.legendItem} ${selectedLegends.includes(item.color) ? styles.selected : ''}`}
+                        onClick={() => handleLegendClick(item.color)}
+                    >
                         <div
                             className={styles.legendColor}
                             style={{ backgroundColor: item.color }}
