@@ -126,7 +126,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.inScoreBar}`} 
                                 style={{ 
                                     '--in-score': item.in_score, 
-                                    '--bar-color': item.in_score > 80 ? '#47924a' : item.in_score > 65 ? '#8BC34A' : item.in_score > 50 ? '#FF9800' : '#F44336' 
+                                    '--bar-color': item.in_score > 80 ? '#8CC581' : item.in_score > 65 ? '#B2E07C' : item.in_score > 50 ? '#FFCC82' : '#FF8C83' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -137,7 +137,7 @@ function SimilarInfo() {
                                 className={`${style.scoreBar} ${style.outScoreBar}`} 
                                 style={{ 
                                     '--out-score': item.out_score, 
-                                    '--bar-color': item.out_score > 80 ? '#47924a' : item.out_score > 65 ? '#8BC34A' : item.out_score > 50 ? '#FF9800' : '#F44336' 
+                                    '--bar-color': item.out_score > 80 ? '#8CC581' : item.out_score > 65 ? '#B2E07C' : item.out_score > 50 ? '#FFCC82' : '#FF8C83' 
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>
