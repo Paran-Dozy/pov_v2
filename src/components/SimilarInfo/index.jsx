@@ -138,7 +138,7 @@ function SimilarInfo() {
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
                         </label>
                         <label className={style.scoreBarContainer}>
-                            <span className={style.scoreLabel}>Total score:</span>
+                            <span className={style.scoreLabel}>Overall score:</span>
                             <div 
                                 className={`${style.scoreBar} ${style.outScoreBar}`} 
                                 style={{ 
