@@ -51,12 +51,26 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    border-top: 0.05px solid #ddd;
 }
 
-.rank, .voter {
+.valLabel {
+    width: 100%;
+    display: inline-block;
+}
+
+.index, .voter {
     font-size: 14px;
 }
+
+.index {
+    min-width: 30px;
+    max-width: 30px;
+    display: inline-block;
+}
+
 .font {
     margin-left: 10px;
     font-size: 12px;
@@ -64,7 +78,7 @@
 
 .voter {
     font-weight: bold;
-    margin-left: 20px;
+    margin-left: 0px;
 }
 
 .finalScore {
@@ -97,28 +111,30 @@
 .scoreBarContainer {
     display: flex;
     flex-direction: row;
-    width: 250px;
+    width: 280px;
     margin-top: 5px;
 }
 
 .scoreLabel {
-    max-width: 60px;
-    min-width: 60px;
+    margin-left: 30px;
+    max-width: 70px;
+    min-width: 70px;
     font-size: 12px;
 }
 
 .scoreBar {
     height: 10px;
-    width: 200px;
+    min-width: 0px;
+    max-width: 105px;
     border-radius: 5px;
 }
 
 .inScoreBar {
-    width: calc(var(--in-score) * 1% * 0.6);
+    width: calc(var(--in-score) * 1% * 0.35);
     background-color: var(--bar-color);
 }
 
 .outScoreBar {
-    width: calc(var(--out-score) * 1% * 0.6);
+    width: calc(var(--out-score) * 1% * 0.35);
     background-color: var(--bar-color);
 }
