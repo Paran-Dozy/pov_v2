@@ -75,25 +75,22 @@
 }
 
 .color_one {
-    background-color: #016c59;
-    opacity: 0.8;
+    background-color: #77BB84;
     color: white;
 }
 
 .color_two {
-    background-color: #1c9099;
-    opacity: 0.8;
+    background-color: #C6E6A0;
     color: white;
 }
 
 .color_three {
-    background-color: #67a9cf;
-    opacity: 0.8;
+    background-color: #FECA99;
     color: white;
 }
 
 .color_four {
-    background-color: #a6bddb;
+    background-color: #E87370;
     color: white;
 }
 
