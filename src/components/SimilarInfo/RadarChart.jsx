@@ -21,13 +21,13 @@ ChartJS.register(
 
 const RadarChart = ({ infoData }) => {
   const colors = [
-    { backgroundColor: 'rgba(44, 136, 201, 0.4)', borderColor: '#94B4CB'},
-    { backgroundColor: 'rgba(246, 178, 41, 0.4)', borderColor: '#F6D696'},
-    { backgroundColor: 'rgba(132, 215, 61, 0.4)', borderColor: '#BBD7A5'},
-    { backgroundColor: 'rgba(203, 39, 132, 0.4)', borderColor: '#CB9BB6'},
-    { backgroundColor: 'rgba(43, 210, 210, 0.4)', borderColor: '#A2D2D2'},
-    { backgroundColor: 'rgba(241, 128, 32, 0.4)', borderColor: '#F1BE91'},
-  ];
+    { backgroundColor: 'rgba(44, 136, 201, 0.4)', borderColor: '#2C88CB'},
+    { backgroundColor: 'rgba(203, 39, 132, 0.4)', borderColor: '#CB2784'},
+    { backgroundColor: 'rgba(241, 128, 32, 0.4)', borderColor: '#F18020'},
+    { backgroundColor: 'rgba(43, 210, 210, 0.4)', borderColor: '#2BD2D2'},
+    { backgroundColor: 'rgba(14, 133, 84, 0.4)', borderColor: '#0E8554'},
+    { backgroundColor: 'rgba(246, 178, 41, 0.4)', borderColor: '#FFD276'},
+  ].reverse();
 
   const data = {
     labels: ['Contribution', 'Stability', 'Popularity', 'Commission', 'Period'],
@@ -42,7 +42,7 @@ const RadarChart = ({ infoData }) => {
       ],
       backgroundColor: colors[index % colors.length].backgroundColor,
       borderColor: colors[index % colors.length].borderColor,
-      borderWidth: 1,
+      borderWidth: 1.5,
     })),
   };
 
@@ -50,12 +50,33 @@ const RadarChart = ({ infoData }) => {
     scale: {
       ticks: { beginAtZero: true },
     },
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
       },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        callbacks: {
+          label: (tooltipItem) => {
+            const label = tooltipItem.dataset.label || '';
+            const value = tooltipItem.raw.toFixed(2);
+            return `${label}: ${value}`;
+          },
+        },
+      },
+    },
+    hover: {
+      mode: 'index',
+      intersect: false,
     },
   };
 
