@@ -21,18 +21,18 @@
 
 .table th, .table td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
 }
 
 .table th {
     background-color: #f2f2f2;
     position: sticky;
     top: 0;
+    padding: 6px 10px 5px 10px;
+    text-align: left;
 }
 
 .table tbody tr:hover {
-    background-color: #f0f0f0; /* Light color to indicate hover */
+    background-color: #f0f0f0;
 }
 
 .clickable {
@@ -41,4 +41,37 @@
 
 .clickable:hover {
     text-decoration: underline;
+}
+
+.table td {
+    padding: 8px;
+}
+
+.centerAlign {
+    text-align: center;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.table td.rightAlign, .table td.leftAlign {
+    min-width: 55px;
+}
+
+.table th.centerAlign, .table td.centerAlign {
+    max-width: 20px;
+    text-align: center;
+}
+
+.table th.centerAlign, .table td.centerAlign {
+    max-width: 20px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -25,6 +25,23 @@ function RawData() {
     const [sortConfig, setSortConfig] = useState({ key: 'final_score', direction: 'descending' });
     const dispatch = useDispatch();
 
+    const headerMapping = {
+        voter: 'Validator',
+        final_score: 'Final Score',
+        token: 'Token',
+        rank: 'Token Rank',
+        delegator: 'Delegator',
+        voting_power: 'Voting Power',
+        p_participation: 'Proposal Participation',
+        p_passed: 'Proposal Passed',
+        p_matchproposal: 'Proposal Match',
+        missblock: 'Missblock',
+        jailed_ratio: 'Jailed Ratio',
+        commission: 'Commission',
+        asset_value: 'Asset Value',
+        day: 'Validation Period'
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             const data = {
@@ -108,6 +125,29 @@ function RawData() {
         return rank;
     };
 
+    const formatValue = (key, value) => {
+        if (typeof value === 'number') {
+            if (['final_score', 'p_participation', 'p_passed', 'p_match'].includes(key)) {
+                return value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            if (key === 'asset_value') {
+                return Math.floor(value).toLocaleString();
+            }
+            return value.toLocaleString();
+        }
+        return value;
+    };
+
+    const getCellClass = (key) => {
+        if (key === 'voter') {
+            return style.leftAlign;
+        }
+        if (key === '*') {
+            return style.centerAlign;
+        }
+        return style.rightAlign;
+    };
+
     return (
         <div className={style.container}>
             <label className='ContainerTitle'>Raw Data</label>
@@ -115,14 +155,21 @@ function RawData() {
                 <table className={style.table}>
                     <thead>
                         <tr>
-                            <th onClick={resetSort} style={{ cursor: 'pointer' }}>#</th>
+                            <th 
+                                className={style.centerAlign}
+                                onClick={resetSort} 
+                                style={{ cursor: 'pointer' }}
+                            >
+                                *
+                            </th>
                             {sortedData.length > 0 && Object.keys(sortedData[0]).map((key) => (
                                 <th 
                                     key={key} 
                                     onClick={() => handleSort(key)}
                                     style={{ cursor: 'pointer' }}
+                                    className={getCellClass(key)}
                                 >
-                                    {key} {getSortIndicator(key)}
+                                    {headerMapping[key] || key} {getSortIndicator(key)}
                                 </th>
                             ))}
                         </tr>
@@ -130,14 +177,14 @@ function RawData() {
                     <tbody>
                         {sortedData.map((row, index) => (
                             <tr key={index}>
-                                <td>{getRank(index)}</td>
+                                <td className={style.centerAlign}>{getRank(index)}</td>
                                 {Object.entries(row).map(([key, value], i) => (
-                                    <td 
-                                        key={i} 
+                                    <td
+                                        key={i}
                                         onClick={key === 'voter' ? () => handleVoterClick(value) : null}
-                                        className={key === 'voter' ? style.clickable : ''}
+                                        className={`${key === 'voter' ? style.clickable : ''} ${getCellClass(key)}`}
                                     >
-                                        {value}
+                                        {formatValue(key, value)}
                                     </td>
                                 ))}
                             </tr>
