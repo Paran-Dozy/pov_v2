@@ -81,7 +81,7 @@ const RecommendViz = () => {
 
         svg.selectAll('*').remove();
 
-        const circles = [50, 100, 150];
+        const circles = [60, 120, 180];
         circles.forEach(radius => {
             svg.append('circle')
                 .attr('cx', centerX)
@@ -95,7 +95,7 @@ const RecommendViz = () => {
 
         labels.forEach((label, index) => {
             const angle = (index * 72 - 90) * (Math.PI / 180);
-            const radius = 150;
+            const radius = 180;
             const x = centerX + radius * Math.cos(angle);
             const y = centerY + radius * Math.sin(angle);
 
@@ -119,27 +119,33 @@ const RecommendViz = () => {
             dispatch(setSelected(true)); 
         };
 
+        const getNodeColor = (d) => {
+            const maxScore = Math.max(d.contribution_score, d.stability_score, d.popularity_score, d.commission_score, d.period_score);
+            if (d.contribution_score === maxScore) return '#FEA49A';
+            if (d.stability_score === maxScore) return '#A4C7E0';
+            if (d.popularity_score === maxScore) return '#FEC990';
+            if (d.commission_score === maxScore) return '#C9E795';
+            if (d.period_score === maxScore) return '#CFA4CF';
+        };
+
         const nodes = svg.selectAll('circle.node')
             .data(similarityData, d => d.voter)
             .join(
                 enter => enter.append('circle')
                     .attr('class', 'node')
-                    .attr('fill', (d) => {
-                        if (d.final_score > 80) return '#016c59';
-                        if (d.final_score > 65) return '#1c9099';
-                        if (d.final_score > 50) return '#67a9cf';
-                        return '#a6bddb';
-                    })
+                    .attr('fill', getNodeColor)
                     .attr('opacity', (d) => {
-                        const nodeColor = getNodeColor(d.final_score);
+                        const nodeColor = getNodeColor(d);
                         if (selectedLegends.length === 0 || selectedLegends.includes(nodeColor)) {
                             return d.voter === similarityData[0].voter ? '0.9' : '0.6';
                         }
                         return '0.2';
                     })
-                    .attr('r', (d) => d.final_score / 5)
+                    .attr('r', (d) => d.final_score / 8)
                     .attr('cx', (d) => previousPositions.current[d.voter]?.x || centerX)
                     .attr('cy', (d) => previousPositions.current[d.voter]?.y || centerY)
+                    .attr('stroke', 'grey')
+                    .attr('stroke-width', 0.2)
                     .on('click', (event, d) => handleClick(d.voter))  
                     .on('mouseover', (event, d) => {
                         if (d !== similarityData[0]) {
@@ -160,7 +166,7 @@ const RecommendViz = () => {
                     .on('mouseout', (event, d) => {
                         if (d !== similarityData[0]) {
                             d3.select(event.currentTarget)
-                                .attr('opacity', selectedLegends.length === 0 || selectedLegends.includes(getNodeColor(d.final_score)) ? 0.6 : 0.2);
+                                .attr('opacity', selectedLegends.length === 0 || selectedLegends.includes(getNodeColor(d)) ? 0.6 : 0.2);
 
                             svg.select('#tooltip').remove();
                         }
@@ -174,11 +180,11 @@ const RecommendViz = () => {
                                 angle = 0;
                             } else {
                                 if (d.similarity >= 0.5) {
-                                    radius = 50 + (1 - d.similarity) * 100;
+                                    radius = 60 + (1 - d.similarity) * 120;
                                 } else if (d.similarity > 0) {
-                                    radius = 100 + (0.5 - d.similarity) * 100;
+                                    radius = 120 + (0.5 - d.similarity) * 120;
                                 } else {
-                                    radius = 150 + Math.abs(d.similarity) * 50;
+                                    radius = 140 + Math.abs(d.similarity) * 60;
                                 }
                                 angle = ((d.degree - 90) * Math.PI) / 180;
                             }
@@ -230,11 +236,13 @@ const RecommendViz = () => {
     }, [similarityData, dispatch, selectedLegends]);
 
     const legendData = [
-        { color: '#016c59', label: 'Recommend' },
-        { color: '#1c9099', label: 'Good' },
-        { color: '#67a9cf', label: 'Caution' },
-        { color: '#a6bddb', label: 'Not Recommend' },
+        { color: '#FEA49A', label: 'Contribution' },
+        { color: '#A4C7E0', label: 'Stability' },
+        { color: '#FEC990', label: 'Popularity' },
+        { color: '#C9E795', label: 'Commission' },
+        { color: '#CFA4CF', label: 'Period' },
     ];
+
 
     const handleLegendClick = (color) => {
         setSelectedLegends((prevSelectedLegends) => {
