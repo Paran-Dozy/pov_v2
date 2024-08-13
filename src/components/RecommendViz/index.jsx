@@ -121,10 +121,10 @@ const RecommendViz = () => {
 
         const getNodeColor = (d) => {
             const maxScore = Math.max(d.contribution_score, d.stability_score, d.popularity_score, d.commission_score, d.period_score);
-            if (d.contribution_score === maxScore) return '#FEA49A';
+            if (d.contribution_score === maxScore) return '#FFA28D';
             if (d.stability_score === maxScore) return '#A4C7E0';
-            if (d.popularity_score === maxScore) return '#FEC990';
-            if (d.commission_score === maxScore) return '#C9E795';
+            if (d.popularity_score === maxScore) return '#FFF39A';
+            if (d.commission_score === maxScore) return '#CE977A';
             if (d.period_score === maxScore) return '#CFA4CF';
         };
 
@@ -236,10 +236,10 @@ const RecommendViz = () => {
     }, [similarityData, dispatch, selectedLegends]);
 
     const legendData = [
-        { color: '#FEA49A', label: 'Contribution' },
+        { color: '#FFA28D', label: 'Contribution' },
         { color: '#A4C7E0', label: 'Stability' },
-        { color: '#FEC990', label: 'Popularity' },
-        { color: '#C9E795', label: 'Commission' },
+        { color: '#FFF39A', label: 'Popularity' },
+        { color: '#CE977A', label: 'Commission' },
         { color: '#CFA4CF', label: 'Period' },
     ];
 

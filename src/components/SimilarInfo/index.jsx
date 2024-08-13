@@ -127,12 +127,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--in-score': item.in_score, 
                                     backgroundColor: item.in_score > 80 
-                                        ? 'rgba(119, 187, 132, 0.8)'
-                                        : item.out_score > 65 
-                                        ? 'rgba(198, 230, 160, 0.8)'
-                                        : item.out_score > 50 
-                                        ? 'rgba(254, 202, 153, 0.8)'
-                                        : 'rgba(232, 115, 112, 0.8)'
+                                        ? 'rgba(103, 137, 111, 1)'
+                                        : item.in_score > 65 
+                                        ? 'rgba(141, 202, 153, 1)'
+                                        : item.in_score > 50 
+                                        ? 'rgba(254, 201, 144, 1)'
+                                        : 'rgba(225, 117, 116, 1)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -144,12 +144,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--out-score': item.out_score, 
                                     backgroundColor: item.out_score > 80 
-                                        ? 'rgba(119, 187, 132, 0.8)'
+                                        ? 'rgba(103, 137, 111, 1)'
                                         : item.out_score > 65 
-                                        ? 'rgba(198, 230, 160, 0.8)'
+                                        ? 'rgba(141, 202, 153, 1)'
                                         : item.out_score > 50 
-                                        ? 'rgba(254, 202, 153, 0.8)'
-                                        : 'rgba(232, 115, 112, 0.8)'
+                                        ? 'rgba(254, 201, 144, 1)'
+                                        : 'rgba(225, 117, 116, 1)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>
