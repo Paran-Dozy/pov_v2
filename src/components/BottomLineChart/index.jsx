@@ -11,6 +11,7 @@ const BottomLineChart = () => {
 
   const inputChain = useSelector((state) => state.chain.inputChain);
   const inputSimilar = useSelector((state) => state.voter.inputSimilar);
+  const colorPallete = useSelector((state) => state.color.colors);
   const options = ['rank', 'token', 'asset_value', 'commission', 'jailed'];
 
   useEffect(() => {
@@ -55,7 +56,8 @@ const BottomLineChart = () => {
 
   const drawLineChart = () => {
     const svg = d3.select(chartRef.current);
-    const colors = ['#94B4CB', '#F6D696', '#BBD7A5', '#CB9BB6', '#A2D2D2', '#F1BE91'];
+    // const colors = ['#94B4CB', '#F6D696', '#BBD7A5', '#CB9BB6', '#A2D2D2', '#F1BE91'];
+    const colors = colorPallete;
     const color = d3.scaleOrdinal().domain(inputSimilar).range(colors);
 
     svg.selectAll('*').remove();

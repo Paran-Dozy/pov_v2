@@ -19,6 +19,8 @@ const initialState = {
 
     inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
 
+    colors: [],
+
     selected: false
 };
 
@@ -105,12 +107,23 @@ const selectSlice = createSlice({
     }
 });
 
+const colorSlice = createSlice({
+    name: 'color',
+    initialState,
+    reducers: {
+        setColors: (state, action) => {
+            state.colors = action.payload;
+        }
+    }
+})
+
 
 export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
 export const { setInputParticipation, setInputPassed, setInputMatch, setInputMissblock, setInputJailedRatio, setInputAssetValue, setInputDelegator, setInputRank, setInputCommission, setInputDay, setInOutRatio } = inputSlice.actions;
 export const { setVoter, setSimilar } = voterSlice.actions;
 export const { setSelected } = selectSlice.actions;
+export const { setColors } = colorSlice.actions;
 
 const store = configureStore({
     reducer: {
@@ -118,7 +131,8 @@ const store = configureStore({
         weight: weightSlice.reducer,
         input: inputSlice.reducer,
         voter: voterSlice.reducer,
-        select: selectSlice.reducer
+        select: selectSlice.reducer,
+        color: colorSlice.reducer
     }
 });
 
