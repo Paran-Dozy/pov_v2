@@ -127,12 +127,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--in-score': item.in_score, 
                                     backgroundColor: item.in_score > 80 
-                                        ? 'rgba(103, 137, 111, 1)'
+                                        ? 'rgba(88, 162, 112, 0.8)'
                                         : item.in_score > 65 
-                                        ? 'rgba(141, 202, 153, 1)'
+                                        ? 'rgba(167, 217, 106, 0.8)'
                                         : item.in_score > 50 
-                                        ? 'rgba(254, 201, 144, 1)'
-                                        : 'rgba(225, 117, 116, 1)'
+                                        ? 'rgba(253, 174, 97, 0.8)'
+                                        : 'rgba(248, 135, 125, 0.8)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.in_score.toFixed(2)}</label>
@@ -144,12 +144,12 @@ function SimilarInfo() {
                                 style={{ 
                                     '--out-score': item.out_score, 
                                     backgroundColor: item.out_score > 80 
-                                        ? 'rgba(103, 137, 111, 1)'
+                                        ? 'rgba(88, 162, 112, 0.8)'
                                         : item.out_score > 65 
-                                        ? 'rgba(141, 202, 153, 1)'
+                                        ? 'rgba(167, 217, 106, 0.8)'
                                         : item.out_score > 50 
-                                        ? 'rgba(254, 201, 144, 1)'
-                                        : 'rgba(225, 117, 116, 1)'
+                                        ? 'rgba(253, 174, 97, 0.8)'
+                                        : 'rgba(248, 135, 125, 0.8)'
                                 }}
                             ></div>
                             <label className={style.font}>{item.out_score.toFixed(2)}</label>

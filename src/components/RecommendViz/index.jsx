@@ -120,10 +120,10 @@ const RecommendViz = () => {
         };
 
         const getNodeColor = (final_score) => {
-            if (final_score > 80) return '#67896F';  // Recommend
-            if (final_score > 65) return '#8DCA99';  // Good
-            if (final_score > 50) return '#FEC990';  // Caution
-            return '#E17574';  // Not Recommend
+            if (final_score > 80) return '#58A270';  // Recommend
+            if (final_score > 65) return '#A7D96A';  // Good
+            if (final_score > 50) return '#FDAE61';  // Caution
+            return '#F8877D';  // Not Recommend
         };
 
         const nodes = svg.selectAll('circle.node')
@@ -135,7 +135,7 @@ const RecommendViz = () => {
                 .attr('opacity', (d) => {
                     const nodeColor = getNodeColor(d.final_score);
                     if (selectedLegends.length === 0 || selectedLegends.includes(nodeColor)) {
-                        return d.voter === similarityData[0].voter ? '0.9' : '0.6';
+                        return d.voter === similarityData[0].voter ? '0.8' : '0.6';
                     }
                     return '0.2';
                 })
@@ -148,7 +148,7 @@ const RecommendViz = () => {
                 .on('mouseover', (event, d) => {
                     if (d !== similarityData[0]) {
                         d3.select(event.currentTarget)
-                            .attr('opacity', 0.8);
+                            .attr('opacity', 1);
 
                         svg.append('text')
                             .attr('id', 'tooltip')
@@ -234,10 +234,10 @@ const RecommendViz = () => {
     }, [similarityData, dispatch, selectedLegends]);
 
     const legendData = [
-        { color: '#67896F', label: 'Recommend' },
-        { color: '#8DCA99', label: 'Good' },
-        { color: '#FEC990', label: 'Caution' },
-        { color: '#E17574', label: 'Not Recommend' },
+        { color: '#58A270', label: 'Recommend' },
+        { color: '#A7D96A', label: 'Good' },
+        { color: '#FDAE61', label: 'Caution' },
+        { color: '#F8877D', label: 'Not Recommend' },
     ];
 
 

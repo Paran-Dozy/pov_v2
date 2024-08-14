@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const baseColors = ['#1A9641', '#74C476', '#FDAE61', '#D7191D'];
+const baseColors = ['#58A270', '#A7D96A', '#FDAE61', '#F8877D'];
 
 const generatePalette = (baseColor) => {
   const palette = [baseColor];
