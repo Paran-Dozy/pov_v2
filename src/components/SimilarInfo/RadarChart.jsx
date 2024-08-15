@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setColors } from '../../store';
 import { Radar } from 'react-chartjs-2';
 import {
@@ -22,7 +22,14 @@ ChartJS.register(
   Legend
 );
 
-const baseColors = ['#58A270', '#A7D96A', '#FDAE61', '#F8877D'];
+const baseColorsGrade = ['#58A270', '#A7D96A', '#FDAE61', '#F8877D'];
+const baseColorsHighScore = {
+  contribution: '#FF523E',
+  stability: '#3291D1',
+  popularity: '#FFE52F',
+  commission: '#B15928',
+  period: '#BF2DC2',
+};
 
 const generatePalette = (baseColor) => {
   const palette = [baseColor];
@@ -34,7 +41,24 @@ const generatePalette = (baseColor) => {
   return palette;
 };
 
-const palettes = baseColors.map(color => generatePalette(color));
+const generatePaletteHighScore = (baseColor, count) => {
+  const palette = [];
+  for (let i = 0; i < count; i++) {
+    const adjustedColor = chroma(baseColor)
+      .set('hsl.h', chroma(baseColor).get('hsl.h') + i * 5)
+      .saturate(i * -0.55)
+      .brighten(i * -0.1)
+      .hex();
+    palette.push(adjustedColor);
+  }
+  return palette;
+};
+
+const palettesGrade = baseColorsGrade.map(color => generatePalette(color));
+const colorPalettesHighScore = Object.keys(baseColorsHighScore).reduce((acc, key) => {
+  acc[key] = generatePaletteHighScore(baseColorsHighScore[key], 6);
+  return acc;
+}, {});
 
 const getBaseColorIndex = (finalScore) => {
   if (finalScore > 80) return 0;
@@ -43,32 +67,60 @@ const getBaseColorIndex = (finalScore) => {
   return 3;
 };
 
+const getHighestScoreColor = (item) => {
+  const scores = [
+    { key: 'contribution', score: item.contribution_score },
+    { key: 'stability', score: item.stability_score },
+    { key: 'popularity', score: item.popularity_score },
+    { key: 'commission', score: item.commission_score },
+    { key: 'period', score: item.period_score },
+  ];
+
+  const highestScore = scores.reduce((max, current) => (current.score > max.score ? current : max), scores[0]);
+
+  return highestScore.key;
+};
+
 const RadarChart = ({ infoData }) => {
   const dispatch = useDispatch();
+  const view = useSelector((state) => state.view.view);
   const colorUsage = { 0: 0, 1: 0, 2: 0, 3: 0 };
-  
-  useEffect(() => {
-    const colors = [];
 
-    sortedData.forEach((item) => {
-      const baseColorIndex = getBaseColorIndex(item.final_score);
-      const color = palettes[baseColorIndex][colorUsage[baseColorIndex] % 6];
-      colorUsage[baseColorIndex]++;
-      colors.push(color);
-    });
+  useEffect(() => {
+    let colors = [];
+
+    const sortedData = [...infoData].sort((a, b) => b.similarity - a.similarity);
+
+    if (view === 'grade') {
+      colors = sortedData.map((item) => {
+        const baseColorIndex = getBaseColorIndex(item.final_score);
+        const color = palettesGrade[baseColorIndex][colorUsage[baseColorIndex] % 6];
+        colorUsage[baseColorIndex]++;
+        return color;
+      });
+    } else if (view === 'highScore') {
+      colors = sortedData.map((item, index) => {
+        const colorCategory = getHighestScoreColor(item);
+        return colorPalettesHighScore[colorCategory][index % colorPalettesHighScore[colorCategory].length];
+      });
+    }
 
     dispatch(setColors(colors));
-  }, [infoData, dispatch]);
+  }, [infoData, dispatch, view]);
 
   const sortedData = [...infoData].sort((a, b) => b.similarity - a.similarity);
 
   const data = {
     labels: ['Contribution', 'Stability', 'Popularity', 'Commission', 'Period'],
     datasets: sortedData.map((item, index) => {
-      const baseColorIndex = getBaseColorIndex(item.final_score);
-      const color = palettes[baseColorIndex][colorUsage[baseColorIndex] % 6];
-
-      colorUsage[baseColorIndex]++;
+      let color;
+      if (view === 'grade') {
+        const baseColorIndex = getBaseColorIndex(item.final_score);
+        color = palettesGrade[baseColorIndex][colorUsage[baseColorIndex] % 6];
+      } else if (view === 'highScore') {
+        const colorCategory = getHighestScoreColor(item);
+        color = colorPalettesHighScore[colorCategory][index % colorPalettesHighScore[colorCategory].length];
+      }
 
       return {
         label: item.voter,
@@ -79,7 +131,7 @@ const RadarChart = ({ infoData }) => {
           item.commission_score,
           item.period_score,
         ],
-        backgroundColor: chroma(color).alpha(0.3).css(),
+        backgroundColor: chroma(color).alpha(0.1).css(),
         borderColor: chroma(color).alpha(0.6).css(),
         borderWidth: 1.5,
       };
@@ -104,7 +156,7 @@ const RadarChart = ({ infoData }) => {
       tooltip: {
         mode: 'index',
         intersect: false,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         callbacks: {
           label: (tooltipItem) => {
             const label = tooltipItem.dataset.label || '';

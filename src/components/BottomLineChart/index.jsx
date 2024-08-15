@@ -47,8 +47,8 @@ const BottomLineChart = () => {
 
   useEffect(() => {
     data.sort((a, b) => inputSimilar.indexOf(a.voter) - inputSimilar.indexOf(b.voter));
-    drawLineChart(data);
-  }, [data]);
+    drawLineChart();
+  }, [data, colorPallete]);
 
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
@@ -56,7 +56,6 @@ const BottomLineChart = () => {
 
   const drawLineChart = () => {
     const svg = d3.select(chartRef.current);
-    // const colors = ['#94B4CB', '#F6D696', '#BBD7A5', '#CB9BB6', '#A2D2D2', '#F1BE91'];
     const colors = colorPallete;
     const color = d3.scaleOrdinal().domain(inputSimilar).range(colors);
 

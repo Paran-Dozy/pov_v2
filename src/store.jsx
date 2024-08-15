@@ -20,7 +20,7 @@ const initialState = {
     inputSimilar: ['chainlayer', 'stakin', 'cyphercore', '0base.vc', 'simplystaking', 'westaking'],
 
     colors: [],
-
+    view: 'grade',
     selected: false
 };
 
@@ -117,6 +117,16 @@ const colorSlice = createSlice({
     }
 })
 
+const viewSlice = createSlice({
+    name: 'view',
+    initialState,
+    reducers: {
+        setView: (state, action) => {
+            state.view = action.payload;
+        }
+    }
+})
+
 
 export const { setChain } = chainSlice.actions;
 export const { setWeight } = weightSlice.actions;
@@ -124,6 +134,7 @@ export const { setInputParticipation, setInputPassed, setInputMatch, setInputMis
 export const { setVoter, setSimilar } = voterSlice.actions;
 export const { setSelected } = selectSlice.actions;
 export const { setColors } = colorSlice.actions;
+export const { setView } = viewSlice.actions;
 
 const store = configureStore({
     reducer: {
@@ -132,7 +143,8 @@ const store = configureStore({
         input: inputSlice.reducer,
         voter: voterSlice.reducer,
         select: selectSlice.reducer,
-        color: colorSlice.reducer
+        color: colorSlice.reducer,
+        view: viewSlice.reducer
     }
 });
 
