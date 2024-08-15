@@ -105,6 +105,7 @@ const BottomLineChart = () => {
         .attr('fill', 'none')
         .attr('stroke', color(key))
         .attr('stroke-width', 2)
+        .attr('opacity', 0.7)
         .attr('d', line);
     });
 
@@ -160,7 +161,7 @@ const BottomLineChart = () => {
         focus.select('.y-hover-line')
           .attr('transform', `translate(${mouseX},${mouseY - height})`);
 
-        tooltip.transition().duration(0).style('opacity', 0.9);
+        tooltip.transition().duration(0).style('opacity', 0.7);
         tooltip.html(formatTooltip(dataAtX))
           .style('left', (event.pageX + 10) + 'px')
           .style('top', (event.pageY - 28) + 'px');

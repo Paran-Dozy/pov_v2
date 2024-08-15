@@ -24,11 +24,11 @@ ChartJS.register(
 
 const baseColorsGrade = ['#58A270', '#A7D96A', '#FDAE61', '#F8877D'];
 const baseColorsHighScore = {
-  contribution: '#FF523E',
+  contribution: '#F55240',
   stability: '#3291D1',
-  popularity: '#FFE52F',
-  commission: '#B15928',
-  period: '#BF2DC2',
+  popularity: '#F8DF2F',
+  commission: '#AB5526',
+  period: '#BD32BF',
 };
 
 const generatePalette = (baseColor) => {
@@ -46,8 +46,8 @@ const generatePaletteHighScore = (baseColor, count) => {
   for (let i = 0; i < count; i++) {
     const adjustedColor = chroma(baseColor)
       .set('hsl.h', chroma(baseColor).get('hsl.h') + i * 5)
-      .saturate(i * -0.55)
-      .brighten(i * -0.1)
+      .saturate(i * -0.35)
+      .brighten(i * -0.05)
       .hex();
     palette.push(adjustedColor);
   }
@@ -132,7 +132,7 @@ const RadarChart = ({ infoData }) => {
           item.period_score,
         ],
         backgroundColor: chroma(color).alpha(0.1).css(),
-        borderColor: chroma(color).alpha(0.6).css(),
+        borderColor: chroma(color).alpha(0.5).css(),
         borderWidth: 1.5,
       };
     }),

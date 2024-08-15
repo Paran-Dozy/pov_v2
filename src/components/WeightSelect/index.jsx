@@ -202,6 +202,7 @@ function WeightSelect() {
                             ))}
                         </div>
                     )}
+                    <div className={style.empty}></div>
                 </div>
             ))}
         </div>
