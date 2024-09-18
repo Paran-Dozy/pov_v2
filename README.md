@@ -1,8 +1,10 @@
+# Proof Of Validator
 
 ![Alt text](image.png)
 
 ## Overview
 This project presents a **Customized Validator Recommender System** designed for Proof of Stake (PoS) blockchain networks. The system enables investors to select the most appropriate validators by visualizing the relationships and scores of validators using a **similarity-based circular visualization** approach. The tool takes into account multiple evaluation metrics such as stability, profitability, and popularity, and allows investors to adjust weights based on personal preferences. The visualization provides a dynamic, intuitive way to compare validators, helping investors make informed staking decisions.
+
 <br>
 
 ## Features
