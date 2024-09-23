@@ -1,1 +1,6 @@
 Flask==2.2.5
+firebase-admin
+flask-cors
+numpy
+pandas
+scikit-learn
