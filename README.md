@@ -1,4 +1,4 @@
-# Proof Of Validator
+# [Proof Of Validator](https://pov-deploy.vercel.app/)
 
 ![Alt text](image.png)
 
@@ -25,5 +25,14 @@ This project presents a **Customized Validator Recommender System** designed for
 
 <br>
 
-## Video URL
-[A Customized Validator Recommender System](https://youtu.be/T12I1t29a3I?si=UF66bmCGlQZFZiT-)
+## Link
+Program Link: [Proof of Validator](https://pov-deploy.vercel.app/)
+<br>
+Poster Link: [LDAV Poster](https://drive.google.com/file/d/1xs3q4TNp8UA7en3E9_X1h_1XhopWMYmJ/view?usp=sharing)
+<br>
+Scenario Video Link: [A Customized Validator Recommender System](https://youtu.be/T12I1t29a3I?si=UF66bmCGlQZFZiT-) (3:33)
+
+<br>
+
+## Acknowledgments
+This research was supported by the MSIT(Ministry of Science and ICT), Korea, under the National Program for Excellence in SW(2022-0-01077) supervised by the IITP(Institute of Information & communications Technology Planning & Evaluation) in 2024
