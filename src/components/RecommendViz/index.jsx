@@ -272,7 +272,7 @@ const RecommendViz = () => {
     };
 
     return (
-        <div>
+        <div className={styles.mainContainer}>
             <div className={styles.radioContainer}>
                 <label className={styles['radio-label']}>
                     <input

@@ -60,6 +60,7 @@ const BottomLineChart = () => {
     const color = d3.scaleOrdinal().domain(inputSimilar).range(colors);
 
     svg.selectAll('*').remove();
+    d3.selectAll('.tooltip').remove();
 
     const margin = { top: 10, right: 10, bottom: 40, left: 50 },
       width = 440 - margin.left - margin.right,

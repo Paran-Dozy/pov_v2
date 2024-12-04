@@ -6,7 +6,6 @@
     background-color: white; 
 }
 
-
 .leftContainer{
     width: 260px;
     height: 720px;
@@ -29,7 +28,7 @@
 
 .title {
     width: 210px;
-    font-size: 26.5px;
+    font-size: 22px;
     font-family: 'AppleSDGothicNeoEB';
     font-weight: bold;
     
